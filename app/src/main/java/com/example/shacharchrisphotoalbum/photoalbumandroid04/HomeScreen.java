@@ -31,27 +31,20 @@ public class HomeScreen extends AppCompatActivity {
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        //create the database
-
         Album a = new Album("A1");
-
         User u = new User();
         u.addAlbum(a);
 
         try {
-            User.write(u);
-            u = User.read();
+            User.write(getApplicationContext(), u);
+            u = User.read(getApplicationContext());
         } catch (IOException | ClassNotFoundException o) {
             o.printStackTrace();
         }
 
 
+        //prints the list of albums in the console.
         Log.d("message", u.toString());
-
-
-
-
-
 
         albumsListView = (ListView) findViewById(R.id.albums_list_view);
         String[] foods = {"Bacon", "Ham", "Tuna", "Candy", "Meatball", "Potato"};

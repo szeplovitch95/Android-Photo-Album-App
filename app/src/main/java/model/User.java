@@ -1,5 +1,7 @@
 package model;
 
+import android.content.Context;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -66,16 +68,19 @@ public class User implements Serializable {
         return albumList;
     }
 
-    public static User read() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C://Users//Dror//AndroidStudioProjects//PhotoAlbumAndroid04//app//Users/albums.dat"));
+    public static User read(Context context) throws IOException, ClassNotFoundException {
+        FileInputStream fis = context.openFileInput(storeFile);
+        ObjectInputStream ois = new ObjectInputStream(fis);
         User user = (User) ois.readObject();
         ois.close();
         return user;
     }
 
-    public static void write(User user) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C://Users//Dror//AndroidStudioProjects//PhotoAlbumAndroid04//app//Users/albums.dat"));
+    public static void write(Context context, User user) throws IOException {
+        FileOutputStream fos = context.openFileOutput(storeFile, Context.MODE_PRIVATE);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(user);
         oos.close();
+        fos.close();
     }
 }
