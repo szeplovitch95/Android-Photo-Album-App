@@ -1,10 +1,11 @@
 package model;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Photo {
+public class Photo implements Serializable {
     private File imageFile;
     private List<Tag> tags;
 
