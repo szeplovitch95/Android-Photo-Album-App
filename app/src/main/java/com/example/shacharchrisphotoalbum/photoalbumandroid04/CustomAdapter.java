@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import model.Album;
 
 
 class CustomAdapter extends ArrayAdapter<String> {
@@ -30,4 +33,6 @@ class CustomAdapter extends ArrayAdapter<String> {
         imageView.setImageResource(R.mipmap.bucky);
         return customView;
     }
+
+
 }

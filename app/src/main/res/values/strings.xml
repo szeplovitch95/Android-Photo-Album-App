@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PhotoAlbumAndroid04</string>
+    <string name="name_label">Name: (required)</string>
+    <string name="save_label">SAVE</string>
+    <string name="cancel_label">CANCEL</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

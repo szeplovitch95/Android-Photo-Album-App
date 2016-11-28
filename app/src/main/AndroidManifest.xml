@@ -15,9 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlbumScreen"></activity>
-        <activity android:name=".SearchPhotosScreen"></activity>
-        <activity android:name=".SearchPhotosScreen"></activity>
+        <activity android:name=".AlbumScreen" />
+        <activity android:name=".SearchPhotosScreen" />
+        <activity android:name=".EditAlbum"></activity>
     </application>
 
 </manifest>
