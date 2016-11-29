@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import java.io.IOException;
@@ -34,7 +35,7 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
         String singleAlbumItem = getItem(position).getAlbumName();
         TextView albumTextView = (TextView) customView.findViewById(R.id.albumNameTextView);
         albumTextView.setText(singleAlbumItem);
-        ImageButton deleteBtn = (ImageButton) customView.findViewById(R.id.removeAlbumButton);
+        Button deleteBtn = (Button) customView.findViewById(R.id.removeAlbumButton);
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
