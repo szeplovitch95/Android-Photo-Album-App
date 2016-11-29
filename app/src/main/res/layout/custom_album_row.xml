@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,24 +9,16 @@
         android:text="TextView"
         android:layout_height="wrap_content"
         android:id="@+id/albumNameTextView"
-        android:layout_width="100dp" />
+        android:layout_width="300dp"
+        android:layout_margin="10dp" />
 
-    <Button
-        android:text="Edit"
+    <ImageButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_width="20dp"
-        android:id="@+id/editAlbumButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:focusable="false" />
-
-    <Button
-        android:text="Remove"
-        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_action_remove"
         android:id="@+id/removeAlbumButton"
-        android:layout_weight="1"
-        android:layout_width="20dp"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:focusable="false" />
+        android:layout_weight="0.17"
+        android:elevation="0dp"
+        android:focusable="false"/>
 
 </LinearLayout>

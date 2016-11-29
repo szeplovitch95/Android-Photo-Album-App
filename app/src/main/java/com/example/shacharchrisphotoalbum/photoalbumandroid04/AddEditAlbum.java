@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 
 
-public class EditAlbum extends AppCompatActivity {
+public class AddEditAlbum extends AppCompatActivity {
     private int albumIndex;
     private EditText albumName;
 

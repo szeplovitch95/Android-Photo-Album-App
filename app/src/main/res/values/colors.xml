@@ -6,4 +6,6 @@
     <color name="backGray">#E5E8E8</color>
     <color name="foreGreen">#229954</color>
     <color name="white">#ffffff</color>
+    <color name="title">#222222</color>
+    <color name="size">#999999</color>
 </resources>

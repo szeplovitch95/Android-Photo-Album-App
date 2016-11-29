@@ -1,31 +1,29 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
-import android.widget.Toast;
-import android.view.MotionEvent;
-import android.view.GestureDetector;
-import android.support.v4.view.GestureDetectorCompat;
 
 import java.io.IOException;
-import java.util.List;
 
 import model.*;
 
 public class HomeScreen extends AppCompatActivity {
 
+    public static final int EDIT_ALBUM_CODE = 1;
+    public static final int ADD_ALBUM_CODE = 2;
+
     private ListView albumsListView;
     private Toolbar myToolbar;
     private User user;
-    private GestureDetectorCompat gestureDetector;
     private ListAdapter listAdapter;
 
     @Override
@@ -35,26 +33,17 @@ public class HomeScreen extends AppCompatActivity {
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-
         try {
             user = User.read(getApplicationContext());
         } catch (IOException | ClassNotFoundException o) {
             o.printStackTrace();
         }
 
-
-
-
         //prints the list of albums in the console.
         Log.d("message", user.toString());
-
-
         albumsListView = (ListView) findViewById(R.id.albums_list_view);
-
         listAdapter = new CustomAlbumAdapter(getApplicationContext(), user.getAlbums(), user);
-
         albumsListView.setAdapter(listAdapter);
-
         albumsListView.setOnItemLongClickListener(
                 new AdapterView.OnItemLongClickListener() {
                     @Override
@@ -66,6 +55,28 @@ public class HomeScreen extends AppCompatActivity {
         );
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_add:
+                addAlbum();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void addAlbum() {
+        Intent intent = new Intent(getApplicationContext(), AddEditAlbum.class);
+        startActivityForResult(intent, ADD_ALBUM_CODE);
+    }
+
     public void editAlbum(int pos) {
         Bundle bundle = new Bundle();
         Album album = user.getAlbums().get(pos);
@@ -73,12 +84,18 @@ public class HomeScreen extends AppCompatActivity {
         bundle.putString("albumName", album.getAlbumName());
         bundle.putInt("index", pos);
 
-        Intent intent = new Intent(getApplicationContext(), EditAlbum.class);
+        Intent intent = new Intent(getApplicationContext(), AddEditAlbum.class);
         intent.putExtras(bundle);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, EDIT_ALBUM_CODE);
     }
 
+
+
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if(resultCode != RESULT_OK) {
+            return;
+        }
+
         Bundle bundle = intent.getExtras();
         if(bundle == null) {
             return;
@@ -86,9 +103,24 @@ public class HomeScreen extends AppCompatActivity {
 
         String albumNewName = bundle.getString("albumName");
         int index = bundle.getInt("index");
-        Album album = user.getAlbums().get(index);
-        album.setAlbumName(albumNewName);
-        Log.d("hello SIR", bundle.getString("albumName"));
+
+        if(requestCode == EDIT_ALBUM_CODE) {
+            Album album = user.getAlbums().get(index);
+            album.setAlbumName(albumNewName);
+        } else if(requestCode == ADD_ALBUM_CODE) {
+            user.getAlbums().add(new Album(albumNewName));
+        }
+
+        albumsListView.setAdapter(listAdapter);
+
+
+        try {
+            saveData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveData() throws IOException, ClassNotFoundException {

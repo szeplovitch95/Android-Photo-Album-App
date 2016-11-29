@@ -7,7 +7,6 @@
     <ImageView
         android:layout_width="91dp"
         android:layout_height="80dp"
-        app:srcCompat="@mipmap/bucky"
         android:id="@+id/albumPic"
         android:cropToPadding="false"
         android:adjustViewBounds="false"

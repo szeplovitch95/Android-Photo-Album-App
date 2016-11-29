@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,6 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
 
     }
 
-
     @NonNull
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -45,8 +45,7 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
         TextView albumTextView = (TextView) customView.findViewById(R.id.albumNameTextView);
         albumTextView.setText(singleAlbumItem);
 
-        Button deleteBtn = (Button) customView.findViewById(R.id.removeAlbumButton);
-        Button editBtn = (Button) customView.findViewById(R.id.editAlbumButton);
+        ImageButton deleteBtn = (ImageButton) customView.findViewById(R.id.removeAlbumButton);
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,13 +61,6 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
                 }
             }
         });
-
-        editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
 
         return customView;
     }

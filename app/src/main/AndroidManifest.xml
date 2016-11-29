@@ -17,7 +17,7 @@
         </activity>
         <activity android:name=".AlbumScreen" />
         <activity android:name=".SearchPhotosScreen" />
-        <activity android:name=".EditAlbum"></activity>
+        <activity android:name=".AddEditAlbum"></activity>
     </application>
 
 </manifest>
