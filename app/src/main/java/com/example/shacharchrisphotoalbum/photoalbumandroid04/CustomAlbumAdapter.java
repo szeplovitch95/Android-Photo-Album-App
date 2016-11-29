@@ -1,24 +1,15 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.IOException;
 import java.util.List;
-
 import model.Album;
 import model.User;
 
@@ -31,7 +22,6 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
         super(context, R.layout.custom_album_row, albums);
         albumList = albums;
         this.user = user;
-
     }
 
     @NonNull
@@ -44,7 +34,6 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
         String singleAlbumItem = getItem(position).getAlbumName();
         TextView albumTextView = (TextView) customView.findViewById(R.id.albumNameTextView);
         albumTextView.setText(singleAlbumItem);
-
         ImageButton deleteBtn = (ImageButton) customView.findViewById(R.id.removeAlbumButton);
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +43,7 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
                 notifyDataSetChanged();
                 try {
                     saveData();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }

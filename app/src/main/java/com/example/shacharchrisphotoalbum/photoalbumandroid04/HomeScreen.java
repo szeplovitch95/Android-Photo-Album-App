@@ -11,16 +11,12 @@ import android.widget.ListView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
-
 import java.io.IOException;
-
 import model.*;
 
 public class HomeScreen extends AppCompatActivity {
-
     public static final int EDIT_ALBUM_CODE = 1;
     public static final int ADD_ALBUM_CODE = 2;
-
     private ListView albumsListView;
     private Toolbar myToolbar;
     private User user;
@@ -41,9 +37,13 @@ public class HomeScreen extends AppCompatActivity {
 
         //prints the list of albums in the console.
         Log.d("message", user.toString());
+
+
+        //sets the listview of albums and the adapter
         albumsListView = (ListView) findViewById(R.id.albums_list_view);
         listAdapter = new CustomAlbumAdapter(getApplicationContext(), user.getAlbums(), user);
         albumsListView.setAdapter(listAdapter);
+
         albumsListView.setOnItemLongClickListener(
                 new AdapterView.OnItemLongClickListener() {
                     @Override
@@ -67,6 +67,7 @@ public class HomeScreen extends AppCompatActivity {
             case R.id.action_add:
                 addAlbum();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -81,6 +82,7 @@ public class HomeScreen extends AppCompatActivity {
         Bundle bundle = new Bundle();
         Album album = user.getAlbums().get(pos);
 
+        //sets up the bundle to be sent to the AddEditAlbum class
         bundle.putString("albumName", album.getAlbumName());
         bundle.putInt("index", pos);
 
@@ -88,8 +90,6 @@ public class HomeScreen extends AppCompatActivity {
         intent.putExtras(bundle);
         startActivityForResult(intent, EDIT_ALBUM_CODE);
     }
-
-
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if(resultCode != RESULT_OK) {
@@ -113,12 +113,9 @@ public class HomeScreen extends AppCompatActivity {
 
         albumsListView.setAdapter(listAdapter);
 
-
         try {
             saveData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
