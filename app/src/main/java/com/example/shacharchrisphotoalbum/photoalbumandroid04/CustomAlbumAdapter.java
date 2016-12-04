@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.io.IOException;
 import java.util.List;
@@ -34,8 +35,11 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
 
         String singleAlbumItem = getItem(position).getAlbumName();
         TextView albumTextView = (TextView) customView.findViewById(R.id.albumNameTextView);
+        TextView albumSizeTextView = (TextView) customView.findViewById(R.id.albumSize);
         albumTextView.setText(singleAlbumItem);
-        Button deleteBtn = (Button) customView.findViewById(R.id.removeAlbumButton);
+        albumSizeTextView.setText("Size: " + getItem(position).getSize() + "");
+        ImageView deleteBtn = (ImageView) customView.findViewById(R.id.removeAlbumButton);
+        ImageView editBtn = (ImageView) customView.findViewById(R.id.editAlbumButton);
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +53,14 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
                 }
             }
         });
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
         return customView;
     }

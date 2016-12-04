@@ -1,8 +1,10 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import model.*;
 public class HomeScreen extends AppCompatActivity {
     public static final int EDIT_ALBUM_CODE = 1;
     public static final int ADD_ALBUM_CODE = 2;
+    public static final int OPEN_ALBUM_CODE = 3;
     private ListView albumsListView;
     private Toolbar myToolbar;
     private User user;
@@ -26,6 +29,8 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -53,6 +58,17 @@ public class HomeScreen extends AppCompatActivity {
                     }
                 }
         );
+
+        albumsListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        openAlbum(position);
+                    }
+                }
+        );
+
+
     }
 
     @Override
@@ -76,6 +92,21 @@ public class HomeScreen extends AppCompatActivity {
     public void addAlbum() {
         Intent intent = new Intent(getApplicationContext(), AddEditAlbum.class);
         startActivityForResult(intent, ADD_ALBUM_CODE);
+    }
+
+    public void openAlbum(int pos) {
+        Bundle bundle = new Bundle();
+        Album album = user.getAlbums().get(pos);
+
+        //sets up the bundle to be sent to the AlbumScreen class
+        bundle.putString("albumName", album.getAlbumName());
+        bundle.putInt("albumIndex", pos);
+
+        Intent intent = new Intent(getApplicationContext(), AlbumScreen.class);
+        intent.putExtras(bundle);
+
+        startActivityForResult(intent, OPEN_ALBUM_CODE);
+
     }
 
     public void editAlbum(int pos) {

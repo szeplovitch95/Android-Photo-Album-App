@@ -20,6 +20,10 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/albums_list_view"></ListView>
+        android:id="@+id/albums_list_view"
+        android:choiceMode="singleChoice"
+        android:listSelector="@android:color/background_light" >
+
+    </ListView>
 
 </LinearLayout>

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:appcompat="http://schemas.android.com/apk/res-auto" >
     <item android:id="@+id/action_add"
-        android:icon="@mipmap/ic_action_black_plus"
+        android:icon="@drawable/ic_add_black_24px"
         android:title="@string/add"
         appcompat:showAsAction="always" />
 </menu>

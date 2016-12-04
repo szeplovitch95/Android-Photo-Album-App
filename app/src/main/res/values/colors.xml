@@ -8,4 +8,6 @@
     <color name="white">#ffffff</color>
     <color name="title">#222222</color>
     <color name="size">#999999</color>
+    <color name="tan_background">#FFF7DA</color>
+    <color name="category_numbers">#FD8E09</color>
 </resources>
