@@ -18,11 +18,20 @@
         <activity android:name=".AlbumScreen">
             android:parentActivityName=".HomeScreen"
             <meta-data
-                android:name= "android.support.PARENT_ACTIVITY"
-                android:value=".HomeScreen"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
         </activity>
         <activity android:name=".SearchPhotosScreen" />
-        <activity android:name=".AddEditAlbum"></activity>
+        <activity android:name=".AddEditAlbum" />
+        <activity android:name=".SlideshowScreen">
+            android:parentActivityName=".HomeScreen"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
+        <activity android:name=".AddPhoto" />
+        <activity android:name=".MoveToAlbum" />
+        <activity android:name=".TagsManager"></activity>
     </application>
 
 </manifest>

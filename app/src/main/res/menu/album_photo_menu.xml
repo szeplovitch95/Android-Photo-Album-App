@@ -5,6 +5,25 @@
         android:icon="@drawable/ic_add_black_24px"
         android:title="@string/add"
         appcompat:showAsAction="always" />
+    <item android:id="@+id/action_menu_photo"
+        android:icon="@drawable/ic_menu_black_24px"
+        android:title="@string/add"
+        appcompat:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/manageTags"
+                android:title="Edit Tags" />
+            <item
+                android:id="@+id/removePhoto"
+                android:title="Remove Photo" />
+            <item
+                android:id="@+id/movePhoto"
+                android:title="Move to" />
+            <item
+                android:id="@+id/slideshow"
+                android:title="Slideshow" />
+        </menu>
+    </item>
 </menu>
 
 
