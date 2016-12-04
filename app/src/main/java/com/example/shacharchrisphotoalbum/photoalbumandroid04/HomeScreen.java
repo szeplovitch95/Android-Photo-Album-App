@@ -1,7 +1,6 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
@@ -29,7 +28,6 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -139,7 +137,8 @@ public class HomeScreen extends AppCompatActivity {
             Album album = user.getAlbums().get(index);
             album.setAlbumName(albumNewName);
         } else if(requestCode == ADD_ALBUM_CODE) {
-            user.getAlbums().add(new Album(albumNewName));
+            Album a = new Album(albumNewName);
+            user.getAlbums().add(a);
         }
 
         albumsListView.setAdapter(listAdapter);
@@ -149,6 +148,10 @@ public class HomeScreen extends AppCompatActivity {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void searchPhotos() {
+
     }
 
     public void saveData() throws IOException, ClassNotFoundException {

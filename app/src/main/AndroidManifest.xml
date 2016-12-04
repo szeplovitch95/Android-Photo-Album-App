@@ -15,7 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlbumScreen" />
+        <activity android:name=".AlbumScreen">
+            android:parentActivityName=".HomeScreen"
+            <meta-data
+                android:name= "android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen"/>
+        </activity>
         <activity android:name=".SearchPhotosScreen" />
         <activity android:name=".AddEditAlbum"></activity>
     </application>

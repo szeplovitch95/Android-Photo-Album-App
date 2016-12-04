@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:appcompat="http://schemas.android.com/apk/res-auto" >
-    <item android:id="@+id/action_search"
-        android:icon="@drawable/ic_search_black_24px"
-        android:title="@string/add"
-        appcompat:showAsAction="always" />
-
-
-    <item android:id="@+id/action_add"
+    <item android:id="@+id/action_add_photo"
         android:icon="@drawable/ic_add_black_24px"
         android:title="@string/add"
         appcompat:showAsAction="always" />

@@ -1,12 +1,13 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Album implements Serializable {
     private String albumName;
-    private List<Photo> photos;
+    private List<Photo> photos = new ArrayList<Photo>();
     private int size =  0;
 
     public Album(String albumName) {

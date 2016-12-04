@@ -17,13 +17,31 @@
         android:background="?attr/colorPrimary"
         android:id="@+id/my_toolbar"
         app:title="Photo Album Application" />
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/photos_list_view"
-        android:choiceMode="singleChoice"
-        android:listSelector="@android:color/background_light" >
 
-    </ListView>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameOfAlbum"
+        android:textSize="24sp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sizeOfAlbum" />
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:columnWidth="90dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        />
 
 </LinearLayout>
