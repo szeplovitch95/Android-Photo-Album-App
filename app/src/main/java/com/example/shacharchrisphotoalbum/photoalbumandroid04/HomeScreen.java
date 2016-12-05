@@ -38,6 +38,12 @@ public class HomeScreen extends AppCompatActivity {
             o.printStackTrace();
         }
 
+
+        if(user == null) {
+            user = new User();
+        }
+
+
         //prints the list of albums in the console.
         Log.d("message", user.toString());
 
@@ -65,8 +71,6 @@ public class HomeScreen extends AppCompatActivity {
                     }
                 }
         );
-
-
 
 
     }
