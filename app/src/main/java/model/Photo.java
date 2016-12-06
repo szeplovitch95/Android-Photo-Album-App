@@ -6,20 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Photo implements Serializable {
-    private File imageFile;
+    private Integer imageRef;
     private List<Tag> tags;
 
-    public Photo(File imageFile) {
-        this.imageFile = imageFile;
+    public Photo(Integer imageFile) {
+        this.imageRef = imageFile;
         this.tags = new ArrayList<Tag>();
     }
 
-    public File getImageFile() {
-        return imageFile;
+    public Integer getImageRef() {
+        return imageRef;
     }
 
-    public void setImageFile(File imageFile) {
-        this.imageFile = imageFile;
+    public void setImageRef(Integer imageFile) {
+        this.imageRef = imageFile;
     }
 
     public List<Tag> getTags() {

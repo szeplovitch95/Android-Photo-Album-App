@@ -1,5 +1,6 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
+
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -10,20 +11,12 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageAdapter extends BaseAdapter {
+public class AlbumImageAdapter extends BaseAdapter {
     private Context mContext;
     private List<Integer> mThumbIds = new ArrayList<Integer>();
 
-    public ImageAdapter(Context c) {
+    public AlbumImageAdapter(Context c) {
         mContext = c;
-        mThumbIds.add(R.mipmap.sample_0);
-        mThumbIds.add(R.mipmap.sample_1);
-        mThumbIds.add(R.mipmap.sample_2);
-        mThumbIds.add(R.mipmap.sample_3);
-        mThumbIds.add(R.mipmap.sample_4);
-        mThumbIds.add(R.mipmap.sample_5);
-        mThumbIds.add(R.mipmap.sample_6);
-        mThumbIds.add(R.mipmap.sample_7);
     }
 
     public int getCount() {
@@ -35,7 +28,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     // create a new ImageView for each item referenced by the Adapter
@@ -53,7 +46,6 @@ public class ImageAdapter extends BaseAdapter {
         imageView.setImageResource(mThumbIds.get(position));
         return imageView;
     }
-
 
     public Integer getImgID(int position){
         return mThumbIds.get(position);

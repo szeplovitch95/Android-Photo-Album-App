@@ -52,6 +52,15 @@ public class Album implements Serializable {
         return photos.contains(photo);
     }
 
+    public void removePhotoByRef(Integer ref) {
+        for(Photo p : photos) {
+            if(p.getImageRef().equals(ref)) {
+                removePhoto(p);
+                return;
+            }
+        }
+    }
+
     public Photo previousPhoto(Photo p) {
         if (p == null) {
             return null;
@@ -62,7 +71,7 @@ public class Album implements Serializable {
         }
 
         for (Photo photo : photos) {
-            if (p.getImageFile().equals(photo.getImageFile())) {
+            if (p.getImageRef().equals(photo.getImageRef())) {
                 if (photos.indexOf(photo) != 0) {
                     return photos.get(photos.indexOf(photo) - 1);
                 }
@@ -82,7 +91,7 @@ public class Album implements Serializable {
         }
 
         for (Photo photo : photos) {
-            if (p.getImageFile().equals(photo.getImageFile())) {
+            if (p.getImageRef().equals(photo.getImageRef())) {
                 if (photos.indexOf(photo) != photos.size() - 1) {
                     return photos.get(photos.indexOf(photo) + 1);
                 }

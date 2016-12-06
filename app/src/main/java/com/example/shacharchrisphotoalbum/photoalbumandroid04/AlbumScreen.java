@@ -39,8 +39,9 @@ public class AlbumScreen extends AppCompatActivity {
     private Toolbar myToolbar;
     private TextView nameOfAlbum;
     private TextView sizeOfAlbum;
-    private ImageAdapter myImgAdapter;
+    private AlbumImageAdapter myImgAdapter;
     private int selectedItem = -1;
+    private GridView gridview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +52,6 @@ public class AlbumScreen extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
-        myImgAdapter = new ImageAdapter(this);
-        final GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(myImgAdapter);
-
-
 
         try {
             user = User.read(getApplicationContext());
@@ -71,7 +66,6 @@ public class AlbumScreen extends AppCompatActivity {
             return;
         }
 
-        //set data recieved from HomeScreen class
         String albumName = data.getString("albumName");
         int albumIndex = data.getInt("albumIndex");
 
@@ -82,32 +76,40 @@ public class AlbumScreen extends AppCompatActivity {
             }
         }
 
+        myImgAdapter = new AlbumImageAdapter(this);
+        gridview = (GridView) findViewById(R.id.gridview);
+
+        for(Photo p : currentAlbumOpen.getPhotos()) {
+            myImgAdapter.addPicture(p.getImageRef());
+        }
+
+        gridview.setAdapter(myImgAdapter);
         nameOfAlbum = (TextView) findViewById(R.id.nameOfAlbum);
         nameOfAlbum.setText("Album Name: " + currentAlbumOpen.getAlbumName());
-
         sizeOfAlbum = (TextView) findViewById(R.id.sizeOfAlbum);
         sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
 
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                selectedItem = position;
                 for (int i = 0; i < myImgAdapter.getCount(); i++) {
                     if(gridview.getChildAt(i) == null) break;
                     if(position == i ){
-                        gridview.getChildAt(i).setBackgroundColor(Color.BLUE);
+                        gridview.getChildAt(i).setBackgroundColor(Color.RED);
                     }else{
                         gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                     }
                 }
 
-                LayoutInflater inflater = getLayoutInflater();
-                View view = inflater.inflate(R.layout.toast_layout,
-                        (ViewGroup) findViewById(R.id.relativeLayout1));
-                view.setBackgroundResource(myImgAdapter.getImgID(position));
-
-                Toast toast = new Toast(parent.getContext());
-                toast.setView(view);
-                toast.show();
+//                LayoutInflater inflater = getLayoutInflater();
+//                View view = inflater.inflate(R.layout.toast_layout,
+//                        (ViewGroup) findViewById(R.id.relativeLayout1));
+//                view.setBackgroundResource(myImgAdapter.getImgID(position));
+//
+//                Toast toast = new Toast(parent.getContext());
+//                toast.setView(view);
+//                toast.show();
             }
         });
     }
@@ -129,6 +131,9 @@ public class AlbumScreen extends AppCompatActivity {
                 manageTags(selectedItem);
                 return true;
             case R.id.removePhoto:
+                if(selectedItem == -1) {
+                    return true;
+                }
                 removePhoto(selectedItem);
                 return true;
             case R.id.movePhoto:
@@ -143,7 +148,7 @@ public class AlbumScreen extends AppCompatActivity {
     }
 
     public void addPhoto() {
-        Intent intent = new Intent(getApplicationContext(), AddPhoto.class);
+        Intent intent = new Intent(getApplicationContext(), PhotoChooser.class);
         startActivityForResult(intent, ADD_PHOTO_CODE);
     }
 
@@ -162,17 +167,26 @@ public class AlbumScreen extends AppCompatActivity {
     public void movePhoto(int position) {
         Bundle bundle = new Bundle();
         Album album = currentAlbumOpen;
-
-        bundle.putString("albumName", album.getAlbumName());
-        bundle.putInt("albumIndex", selectedItem);
-
-            Intent intent = new Intent(getApplicationContext(), MoveToAlbum.class);
-        intent.putExtras(bundle);
+        Intent intent = new Intent(getApplicationContext(), MoveToAlbum.class);
         startActivityForResult(intent, MOVE_TO_CODE);
     }
 
+    //still needs more implementation to work perfectly.
+    // fix this so when you move a photo that already exists, you remove the right
+    // photo and have no problems with the index. VERY IMPORTANT.
     public void removePhoto(int position) {
+        Integer ref = myImgAdapter.getItem(position);
+        myImgAdapter.removePicture(ref);
+        myImgAdapter.notifyDataSetChanged();
+        currentAlbumOpen.removePhotoByRef(ref);
+        sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
+        selectedItem = -1;
 
+        try {
+            saveData();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void manageTags(int position) {
@@ -194,6 +208,44 @@ public class AlbumScreen extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if(resultCode != RESULT_OK) {
             return;
+        }
+
+        if(requestCode == ADD_PHOTO_CODE) {
+            Bundle bundle = intent.getExtras();
+            Integer x = bundle.getInt("ref");
+            myImgAdapter.addPicture(x);
+            myImgAdapter.notifyDataSetChanged();
+            currentAlbumOpen.addPhoto(new Photo(x));
+            sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
+        }
+
+        else if(requestCode == SLIDESHOW_CODE) {
+        }
+
+        else if(requestCode == MOVE_TO_CODE) {
+            Bundle bundle = intent.getExtras();
+            String albumRef = bundle.getString("albumRefName");
+            Integer ref = myImgAdapter.getItem(selectedItem);
+            Album a = user.getAlbumByName(albumRef);
+            a.addPhoto(new Photo(ref));
+
+            myImgAdapter.removePicture(ref);
+            myImgAdapter.notifyDataSetChanged();
+            currentAlbumOpen.removePhotoByRef(ref);
+            sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
+            selectedItem = -1;
+        }
+
+        else if(requestCode == MANAGE_TAGS_CODE) {
+
+        }
+
+
+        //Save all of the changed data for next time
+        try {
+            saveData();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

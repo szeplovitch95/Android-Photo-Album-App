@@ -30,8 +30,24 @@
                 android:value=".HomeScreen" />
         </activity>
         <activity android:name=".AddPhoto" />
-        <activity android:name=".MoveToAlbum" />
-        <activity android:name=".TagsManager"></activity>
+        <activity android:name=".MoveToAlbum">
+            android:parentActivityName=".HomeScreen"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
+        <activity android:name=".TagsManager">
+            android:parentActivityName=".HomeScreen"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
+        <activity android:name=".PhotoChooser">
+            android:parentActivityName=".HomeScreen"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
     </application>
 
 </manifest>
