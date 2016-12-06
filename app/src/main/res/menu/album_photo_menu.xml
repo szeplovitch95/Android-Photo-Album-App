@@ -12,7 +12,7 @@
         <menu>
             <item
                 android:id="@+id/manageTags"
-                android:title="Edit Tags" />
+                android:title="Edit Photo" />
             <item
                 android:id="@+id/removePhoto"
                 android:title="Remove Photo" />
@@ -21,7 +21,7 @@
                 android:title="Move to" />
             <item
                 android:id="@+id/slideshow"
-                android:title="Slideshow" />
+                android:title="Open Slideshow" />
         </menu>
     </item>
 </menu>

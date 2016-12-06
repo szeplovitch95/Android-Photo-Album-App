@@ -16,7 +16,7 @@
         android:elevation="2dp"
         android:background="?attr/colorPrimary"
         android:id="@+id/my_toolbar"
-        app:title="Photo Album Application" />
+        app:title="Choose Photo" />
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gridview"

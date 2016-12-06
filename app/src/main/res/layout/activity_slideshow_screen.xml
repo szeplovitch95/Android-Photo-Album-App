@@ -5,10 +5,6 @@
     android:id="@+id/slideshow_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.shacharchrisphotoalbum.photoalbumandroid04.SlideshowScreen"
     android:orientation="vertical"
     android:weightSum="1">
@@ -19,11 +15,12 @@
         android:background="?attr/colorPrimary"
         android:theme="?attr/actionBarTheme"
         android:minHeight="?attr/actionBarSize"
-        android:id="@+id/my_toolbar" />
+        android:id="@+id/my_toolbar"
+        app:title="Photos Slideshow" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="416dp"
+        android:layout_height="457dp"
         android:id="@+id/imageView" />
 
     <LinearLayout

@@ -5,24 +5,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
-import java.io.File;
 import java.io.IOException;
 
 import model.Album;
@@ -89,7 +78,6 @@ public class AlbumScreen extends AppCompatActivity {
         sizeOfAlbum = (TextView) findViewById(R.id.sizeOfAlbum);
         sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
 
-
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 selectedItem = position;
@@ -101,19 +89,9 @@ public class AlbumScreen extends AppCompatActivity {
                         gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                     }
                 }
-
-//                LayoutInflater inflater = getLayoutInflater();
-//                View view = inflater.inflate(R.layout.toast_layout,
-//                        (ViewGroup) findViewById(R.id.relativeLayout1));
-//                view.setBackgroundResource(myImgAdapter.getImgID(position));
-//
-//                Toast toast = new Toast(parent.getContext());
-//                toast.setView(view);
-//                toast.show();
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -128,18 +106,19 @@ public class AlbumScreen extends AppCompatActivity {
                 addPhoto();
                 return true;
             case R.id.manageTags:
+                if(myImgAdapter.getCount() == 0) return true;
                 manageTags(selectedItem);
                 return true;
             case R.id.removePhoto:
-                if(selectedItem == -1) {
-                    return true;
-                }
+                if(myImgAdapter.getCount() == 0 || selectedItem == -1) return true;
                 removePhoto(selectedItem);
                 return true;
             case R.id.movePhoto:
+                if(myImgAdapter.getCount() == 0) return true;
                 movePhoto(selectedItem);
                 return true;
             case R.id.slideshow:
+                if(myImgAdapter.getCount() == 0) return true;
                 openSlideShow();
                 return true;
             default:
@@ -166,8 +145,9 @@ public class AlbumScreen extends AppCompatActivity {
 
     public void movePhoto(int position) {
         Bundle bundle = new Bundle();
-        Album album = currentAlbumOpen;
+        bundle.putString("albumName", currentAlbumOpen.getAlbumName());
         Intent intent = new Intent(getApplicationContext(), MoveToAlbum.class);
+        intent.putExtras(bundle);
         startActivityForResult(intent, MOVE_TO_CODE);
     }
 
@@ -186,6 +166,11 @@ public class AlbumScreen extends AppCompatActivity {
             saveData();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        }
+
+        for (int i = 0; i < myImgAdapter.getCount(); i++) {
+            if(gridview.getChildAt(i) == null) break;
+            gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
         }
     }
 

@@ -51,7 +51,6 @@ public class PhotoChooser extends AppCompatActivity {
         final GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(myImgAdapter);
 
-
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 selectedItem = position;
@@ -59,7 +58,7 @@ public class PhotoChooser extends AppCompatActivity {
                     if(gridview.getChildAt(i) == null) break;
                     if(position == i ){
                         gridview.getChildAt(i).setBackgroundColor(Color.RED);
-                    }else{
+                    } else {
                         gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                     }
                 }

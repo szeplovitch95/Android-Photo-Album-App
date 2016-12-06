@@ -14,9 +14,9 @@ import java.util.List;
 
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4108914196952100996L;
     public static final String storeDir = "Users";
-    public static final String storeFile = "albums.dat";
+    public static final String storeFile = "albums";
 
 
     private List<Album> albums;
@@ -81,6 +81,5 @@ public class User implements Serializable {
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(user);
         oos.close();
-        fos.close();
     }
 }

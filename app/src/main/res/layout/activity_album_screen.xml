@@ -16,8 +16,7 @@
         android:elevation="2dp"
         android:background="?attr/colorPrimary"
         android:id="@+id/my_toolbar"
-        app:title="Photo Album Application" />
-
+        app:title="Photo Album" />
 
     <TextView
         android:text="TextView"

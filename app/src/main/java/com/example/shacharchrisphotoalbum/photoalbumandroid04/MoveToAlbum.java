@@ -40,6 +40,10 @@ public class MoveToAlbum extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         listView = (ListView) findViewById(R.id.albums_list_view);
 
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle == null) return;
+
         try {
             user = User.read(getApplicationContext());
         } catch (IOException | ClassNotFoundException o) {
@@ -47,7 +51,9 @@ public class MoveToAlbum extends AppCompatActivity {
         }
 
         for(Album a: user.getAlbums()) {
-            temp.add(a.getAlbumName());
+            if(!a.getAlbumName().equals(bundle.getString("albumName"))) {
+                temp.add(a.getAlbumName());
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, temp);
@@ -72,6 +78,7 @@ public class MoveToAlbum extends AppCompatActivity {
 
     //STILL NEEDS THE CORRECT IMPLEMENTATION ONCE KNOWING HOW AND FROM WHERE TO ADD PHOTOS TO THE APPLICATION.
     public void save(View view) {
+
         if (selectedItem == -1) {
             Bundle bundle = new Bundle();
             bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No album was selected");
