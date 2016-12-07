@@ -241,16 +241,12 @@ public class AlbumScreen extends AppCompatActivity {
             sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
         }
 
-        else if(requestCode == SLIDESHOW_CODE) {
-
-        }
-
         else if(requestCode == MOVE_TO_CODE) {
             Bundle bundle = intent.getExtras();
             String albumRef = bundle.getString("albumRefName");
             Integer ref = myImgAdapter.getItem(selectedItem);
             Album a = user.getAlbumByName(albumRef);
-            a.addPhoto(new Photo(ref));
+            a.addPhoto(currentAlbumOpen.getPhotos().get(selectedItem));
 
             myImgAdapter.removePicture(ref);
             myImgAdapter.notifyDataSetChanged();
@@ -263,8 +259,6 @@ public class AlbumScreen extends AppCompatActivity {
 
         }
 
-
-        //Save all of the changed data for next time
         try {
             saveData();
         } catch (IOException | ClassNotFoundException e) {

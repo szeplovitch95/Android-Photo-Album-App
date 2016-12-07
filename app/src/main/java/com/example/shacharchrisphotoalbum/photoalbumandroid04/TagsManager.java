@@ -74,8 +74,6 @@ public class TagsManager extends AppCompatActivity {
         removeTagBtn = (Button) findViewById(R.id.tagRemoveBtn);
         editTagBtn = (Button) findViewById(R.id.editTagBtn);
         tagsListView = (ListView) findViewById(R.id.tagsListVIew);
-
-
         singleImageView.setImageResource(currentPhoto.getImageRef());
 
         for(Tag t : currentPhoto.getTags()) {
@@ -84,7 +82,6 @@ public class TagsManager extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tags);
         tagsListView.setAdapter(adapter);
-
 
         addTagBtn.setOnClickListener(
                 new View.OnClickListener() {
@@ -99,7 +96,15 @@ public class TagsManager extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(selectedIndex == -1) return;
+                        if(selectedIndex == -1) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"A tag needs to be selected");
+                            DialogFragment newFragment = new AlbumDialogFragment();
+                            newFragment.setArguments(bundle);
+                            newFragment.show(getFragmentManager(), "Album cannot be empty");
+                            return;
+                        }
+
                         removeTag();
                     }
                 }
@@ -109,6 +114,15 @@ public class TagsManager extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(selectedIndex == -1) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"A tag needs to be selected");
+                            DialogFragment newFragment = new AlbumDialogFragment();
+                            newFragment.setArguments(bundle);
+                            newFragment.show(getFragmentManager(), "Album cannot be empty");
+                            return;
+                        }
+
                         editTag();
                     }
                 }
@@ -178,6 +192,15 @@ public class TagsManager extends AppCompatActivity {
         if(bundle == null) return;
 
         if(requestCode == ADD_TAG_CODE) {
+            if(currentPhoto.tagExists(new Tag(bundle.getString("tagType"), bundle.getString("tagValue")))) {
+                    Bundle info = new Bundle();
+                    info.putString(AlbumDialogFragment.MESSAGE_KEY,"The tag value pair already exists.\n" +
+                            "A photo may not have duplicate tags");
+                    DialogFragment newFragment = new AlbumDialogFragment();
+                    newFragment.setArguments(info);
+                    newFragment.show(getFragmentManager(), "Album cannot be empty");
+                    return;
+            }
             String tagType = bundle.getString("tagType");
             String tagValue = bundle.getString("tagValue");
             currentPhoto.addTag(new Tag(tagType, tagValue));
@@ -186,6 +209,16 @@ public class TagsManager extends AppCompatActivity {
         }
 
         if(requestCode == EDIT_TAG_CODE) {
+            if(currentPhoto.tagExists(new Tag(bundle.getString("tagType"), bundle.getString("tagValue")))) {
+                Bundle info = new Bundle();
+                info.putString(AlbumDialogFragment.MESSAGE_KEY,"The tag value pair already exists.\n" +
+                        "A photo may not have duplicate tags");
+                DialogFragment newFragment = new AlbumDialogFragment();
+                newFragment.setArguments(info);
+                newFragment.show(getFragmentManager(), "Album cannot be empty");
+                return;
+            }
+
             String tagType = bundle.getString("tagType");
             String tagValue = bundle.getString("tagValue");
             Tag t = currentPhoto.getTags().get(selectedIndex);

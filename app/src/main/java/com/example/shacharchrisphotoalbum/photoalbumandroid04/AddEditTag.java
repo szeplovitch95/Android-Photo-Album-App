@@ -8,20 +8,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+
+import model.Album;
 
 public class AddEditTag extends AppCompatActivity {
     private String tagType;
     private String tagValue;
     private EditText tagTypeEText;
     private EditText tagValueEText;
-
+    private Album currentAlbum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_tag);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
@@ -56,13 +56,22 @@ public class AddEditTag extends AppCompatActivity {
             return;
         }
 
-        Bundle bundle = new Bundle();
-        bundle.putString("tagType", tagTypeEText.getText().toString());
-        bundle.putString("tagValue",tagValueEText.getText().toString());
-
-        Intent intent = new Intent();
-        intent.putExtras(bundle);
-        setResult(RESULT_OK, intent);
-        finish();
+        if(tagType.equals("person") || tagType.equals("location")) {
+            Bundle bundle = new Bundle();
+            bundle.putString("tagType", tagTypeEText.getText().toString());
+            bundle.putString("tagValue", tagValueEText.getText().toString());
+            Intent intent = new Intent();
+            intent.putExtras(bundle);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+        else {
+            Bundle bundle = new Bundle();
+            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Tag Type must be either Location or Person");
+            DialogFragment newFragment = new AlbumDialogFragment();
+            newFragment.setArguments(bundle);
+            newFragment.show(getFragmentManager(), "missing fields");
+            return;
+        }
     }
 }

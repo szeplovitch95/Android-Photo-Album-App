@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:appcompat="http://schemas.android.com/apk/res-auto" >
 
-
     <item android:id="@+id/action_add"
         android:icon="@drawable/ic_add_black_24px"
         android:title="@string/add"
@@ -14,18 +13,13 @@
         <menu>
             <item
                 android:id="@+id/edit_album"
-                android:title="Edit Photo" />
+                android:title="Edit Album" />
             <item
                 android:id="@+id/search_photos"
                 android:title="Search Photos" />
             <item
                 android:id="@+id/open_album"
-                android:title="Open Selected Album" />
+                android:title="Open Album" />
         </menu>
     </item>
 </menu>
-
-
-
-
-
