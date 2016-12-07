@@ -1,11 +1,9 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,15 +15,12 @@ import model.Photo;
 import model.User;
 
 public class SlideshowScreen extends AppCompatActivity {
-    private Album currentAlbumOpen;
-    private Toolbar toolbar;
     private Button previousBtn;
     private Button nextBtn;
     ImageView imageView;
     User user;
     Album currentAlbum;
     int currentIndex = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

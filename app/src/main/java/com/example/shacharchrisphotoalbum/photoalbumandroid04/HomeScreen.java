@@ -21,7 +21,6 @@ public class HomeScreen extends AppCompatActivity {
     public static final int ADD_ALBUM_CODE = 2;
     public static final int OPEN_ALBUM_CODE = 3;
     public static final int SEARCH_ALL_PHOTOS = 4;
-
     private ListView albumsListView;
     private Toolbar myToolbar;
     private User user;
@@ -85,6 +84,7 @@ public class HomeScreen extends AppCompatActivity {
             case R.id.action_add:
                 addAlbum();
                 return true;
+
             case R.id.edit_album:
                 if(albumsListView.getCount() == 0 || selectedItem == -1) {
                     Bundle bundle = new Bundle();
@@ -96,6 +96,7 @@ public class HomeScreen extends AppCompatActivity {
                 }
                 editAlbum(selectedItem);
                 return true;
+
             case R.id.open_album:
                 if(albumsListView.getCount() == 0 || selectedItem == -1) {
                     Bundle bundle = new Bundle();
@@ -136,10 +137,8 @@ public class HomeScreen extends AppCompatActivity {
         //sets up the bundle to be sent to the AlbumScreen class
         bundle.putString("albumName", album.getAlbumName());
         bundle.putInt("albumIndex", pos);
-
         Intent intent = new Intent(getApplicationContext(), AlbumScreen.class);
         intent.putExtras(bundle);
-
         startActivityForResult(intent, OPEN_ALBUM_CODE);
     }
 
@@ -150,7 +149,6 @@ public class HomeScreen extends AppCompatActivity {
         //sets up the bundle to be sent to the AddEditAlbum class
         bundle.putString("albumName", album.getAlbumName());
         bundle.putInt("index", pos);
-
         Intent intent = new Intent(getApplicationContext(), AddEditAlbum.class);
         intent.putExtras(bundle);
         startActivityForResult(intent, EDIT_ALBUM_CODE);
@@ -185,7 +183,6 @@ public class HomeScreen extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
     public void searchPhotos() {
         Intent intent = new Intent(getApplicationContext(), SearchPhotosScreen.class);

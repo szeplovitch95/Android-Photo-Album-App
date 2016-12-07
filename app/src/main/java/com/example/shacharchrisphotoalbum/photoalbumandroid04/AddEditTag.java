@@ -10,14 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
-import model.Album;
-
 public class AddEditTag extends AppCompatActivity {
     private String tagType;
     private String tagValue;
     private EditText tagTypeEText;
     private EditText tagValueEText;
-    private Album currentAlbum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

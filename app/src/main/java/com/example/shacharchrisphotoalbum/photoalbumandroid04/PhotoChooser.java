@@ -9,24 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import model.Album;
-import model.User;
 
 public class PhotoChooser extends AppCompatActivity {
-
-    private Album currentAlbumOpen;
-    private User user;
-    private Toolbar myToolbar;
-    private TextView nameOfAlbum;
-    private TextView sizeOfAlbum;
     private ImageAdapter myImgAdapter;
     private int selectedItem = -1;
 
@@ -39,14 +26,6 @@ public class PhotoChooser extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
-        Bundle data = getIntent().getExtras();
-
-//        if(data == null)
-//        {
-//            return;
-//        }
-
         myImgAdapter = new ImageAdapter(this);
         final GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(myImgAdapter);
@@ -62,15 +41,6 @@ public class PhotoChooser extends AppCompatActivity {
                         gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                     }
                 }
-
-//                LayoutInflater inflater = getLayoutInflater();
-//                View view = inflater.inflate(R.layout.toast_layout,
-//                        (ViewGroup) findViewById(R.id.relativeLayout1));
-//                view.setBackgroundResource(myImgAdapter.getImgID(position));
-//
-//                Toast toast = new Toast(parent.getContext());
-//                toast.setView(view);
-//                toast.show();
             }
         });
     }
@@ -98,7 +68,6 @@ public class PhotoChooser extends AppCompatActivity {
         Log.d("Integer: ", ref + "" );
 
         bundle.putInt("ref", ref);
-
         Intent intent = new Intent();
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);

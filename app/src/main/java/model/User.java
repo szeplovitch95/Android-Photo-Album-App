@@ -13,11 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
-
     private static final long serialVersionUID = 4108914196952100996L;
     public static final String storeDir = "Users";
     public static final String storeFile = "albums";
-
 
     private List<Album> albums;
 

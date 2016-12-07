@@ -26,7 +26,6 @@ public class AlbumScreen extends AppCompatActivity {
     public static final int MOVE_TO_CODE = 4;
     private Album currentAlbumOpen;
     private User user;
-    private Toolbar myToolbar;
     private TextView nameOfAlbum;
     private TextView sizeOfAlbum;
     private AlbumImageAdapter myImgAdapter;
@@ -51,13 +50,9 @@ public class AlbumScreen extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
 
-        if(data == null)
-        {
-            return;
-        }
+        if(data == null) return;
 
         String albumName = data.getString("albumName");
-        int albumIndex = data.getInt("albumIndex");
 
         for(Album a : user.getAlbums()) {
             if(a.getAlbumName().equals(albumName)) {
@@ -84,9 +79,10 @@ public class AlbumScreen extends AppCompatActivity {
                 selectedItem = position;
                 for (int i = 0; i < myImgAdapter.getCount(); i++) {
                     if(gridview.getChildAt(i) == null) break;
-                    if(position == i ){
+                    if(position == i ) {
                         gridview.getChildAt(i).setBackgroundColor(Color.RED);
-                    }else{
+                    }
+                    else{
                         gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                     }
                 }
@@ -106,7 +102,6 @@ public class AlbumScreen extends AppCompatActivity {
             case R.id.action_add_photo:
                 addPhoto();
                 return true;
-
             case R.id.manageTags:
                 if(myImgAdapter.getCount() == 0) {
                     Bundle bundle = new Bundle();
@@ -119,7 +114,6 @@ public class AlbumScreen extends AppCompatActivity {
 
                 manageTags(selectedItem);
                 return true;
-
             case R.id.removePhoto:
                 if(myImgAdapter.getCount() == 0 || selectedItem == -1) {
                     Bundle bundle = new Bundle();
@@ -132,7 +126,6 @@ public class AlbumScreen extends AppCompatActivity {
 
                 removePhoto(selectedItem);
                 return true;
-
             case R.id.movePhoto:
                 if(myImgAdapter.getCount() == 0) {
                     Bundle bundle = new Bundle();
@@ -145,7 +138,6 @@ public class AlbumScreen extends AppCompatActivity {
 
                 movePhoto(selectedItem);
                 return true;
-
             case R.id.slideshow:
                 if(myImgAdapter.getCount() == 0) {
                     Bundle bundle = new Bundle();
@@ -157,7 +149,6 @@ public class AlbumScreen extends AppCompatActivity {
                 }
                 openSlideShow();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -171,10 +162,8 @@ public class AlbumScreen extends AppCompatActivity {
     public void openSlideShow() {
         Bundle bundle = new Bundle();
         Album album = currentAlbumOpen;
-
         bundle.putString("albumName", album.getAlbumName());
         bundle.putInt("albumIndex", selectedItem);
-
         Intent intent = new Intent(getApplicationContext(), SlideshowScreen.class);
         intent.putExtras(bundle);
         startActivityForResult(intent, SLIDESHOW_CODE);
@@ -214,10 +203,8 @@ public class AlbumScreen extends AppCompatActivity {
     public void manageTags(int position) {
         Bundle bundle = new Bundle();
         Album album = currentAlbumOpen;
-
         bundle.putString("albumName", album.getAlbumName());
         bundle.putInt("albumIndex", selectedItem);
-
         Intent intent = new Intent(getApplicationContext(), TagsManager.class);
         intent.putExtras(bundle);
         startActivityForResult(intent, MANAGE_TAGS_CODE);
@@ -256,7 +243,7 @@ public class AlbumScreen extends AppCompatActivity {
         }
 
         else if(requestCode == MANAGE_TAGS_CODE) {
-
+            //leave empty for now. most likely will stay empty.
         }
 
         try {

@@ -41,7 +41,6 @@ public class MoveToAlbum extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.albums_list_view);
 
         Bundle bundle = getIntent().getExtras();
-
         if(bundle == null) return;
 
         try {
@@ -59,7 +58,6 @@ public class MoveToAlbum extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, temp);
         listView.setAdapter(adapter);
 
-
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -76,7 +74,6 @@ public class MoveToAlbum extends AppCompatActivity {
         finish();
     }
 
-    //STILL NEEDS THE CORRECT IMPLEMENTATION ONCE KNOWING HOW AND FROM WHERE TO ADD PHOTOS TO THE APPLICATION.
     public void save(View view) {
 
         if (selectedItem == -1) {
@@ -91,7 +88,6 @@ public class MoveToAlbum extends AppCompatActivity {
         //creates the bundle to be sent back to the caller
         Bundle bundle = new Bundle();
         bundle.putString("albumRefName", temp.get(selectedItem));
-
         Intent intent = new Intent();
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
