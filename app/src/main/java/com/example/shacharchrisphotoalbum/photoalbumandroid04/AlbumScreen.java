@@ -1,5 +1,6 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -105,22 +106,58 @@ public class AlbumScreen extends AppCompatActivity {
             case R.id.action_add_photo:
                 addPhoto();
                 return true;
+
             case R.id.manageTags:
-                if(myImgAdapter.getCount() == 0) return true;
+                if(myImgAdapter.getCount() == 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No photo was selected or/and album is empty");
+                    DialogFragment newFragment = new AlbumDialogFragment();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(getFragmentManager(), "Album cannot be empty");
+                    return true;
+                }
+
                 manageTags(selectedItem);
                 return true;
+
             case R.id.removePhoto:
-                if(myImgAdapter.getCount() == 0 || selectedItem == -1) return true;
+                if(myImgAdapter.getCount() == 0 || selectedItem == -1) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No photo was selected or/and album is empty");
+                    DialogFragment newFragment = new AlbumDialogFragment();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(getFragmentManager(), "Album cannot be empty");
+                    return true;
+                }
+
                 removePhoto(selectedItem);
                 return true;
+
             case R.id.movePhoto:
-                if(myImgAdapter.getCount() == 0) return true;
+                if(myImgAdapter.getCount() == 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No photo was selected or/and album is empty");
+                    DialogFragment newFragment = new AlbumDialogFragment();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(getFragmentManager(), "Album cannot be empty");
+                    return true;
+                }
+
                 movePhoto(selectedItem);
                 return true;
+
             case R.id.slideshow:
-                if(myImgAdapter.getCount() == 0) return true;
+                if(myImgAdapter.getCount() == 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Album is empty");
+                    DialogFragment newFragment = new AlbumDialogFragment();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(getFragmentManager(), "Album cannot be empty");
+                    return true;
+                }
                 openSlideShow();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -151,7 +188,7 @@ public class AlbumScreen extends AppCompatActivity {
         startActivityForResult(intent, MOVE_TO_CODE);
     }
 
-    //still needs more implementation to work perfectly.
+    // still needs more implementation to work perfectly.
     // fix this so when you move a photo that already exists, you remove the right
     // photo and have no problems with the index. VERY IMPORTANT.
     public void removePhoto(int position) {
@@ -205,6 +242,7 @@ public class AlbumScreen extends AppCompatActivity {
         }
 
         else if(requestCode == SLIDESHOW_CODE) {
+
         }
 
         else if(requestCode == MOVE_TO_CODE) {

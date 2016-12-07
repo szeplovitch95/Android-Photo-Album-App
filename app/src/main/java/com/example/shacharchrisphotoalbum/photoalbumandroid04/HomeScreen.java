@@ -1,6 +1,8 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
+import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,10 +20,13 @@ public class HomeScreen extends AppCompatActivity {
     public static final int EDIT_ALBUM_CODE = 1;
     public static final int ADD_ALBUM_CODE = 2;
     public static final int OPEN_ALBUM_CODE = 3;
+    public static final int SEARCH_ALL_PHOTOS = 4;
+
     private ListView albumsListView;
     private Toolbar myToolbar;
     private User user;
     private ListAdapter listAdapter;
+    int selectedItem = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,39 +42,35 @@ public class HomeScreen extends AppCompatActivity {
             o.printStackTrace();
         }
 
-
         if(user == null) {
             user = new User();
         }
 
-
         //prints the list of albums in the console.
         Log.d("message", user.toString());
-
 
         //sets the listview of albums and the adapter
         albumsListView = (ListView) findViewById(R.id.albums_list_view);
         listAdapter = new CustomAlbumAdapter(getApplicationContext(), user.getAlbums(), user);
         albumsListView.setAdapter(listAdapter);
 
-        albumsListView.setOnItemLongClickListener(
-                new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-                        editAlbum(position);
-                        return true;
-                    }
-                }
-        );
-
         albumsListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        openAlbum(position);
+                        for(int i = 0; i < listAdapter.getCount(); i++) {
+                            if(albumsListView.getChildAt(i) == null) break;
+                            if(position == i) {
+                                albumsListView.getChildAt(i).setBackgroundColor(Color.rgb(15,122,141));
+                            } else {
+                                albumsListView.getChildAt(i).setBackgroundColor(Color.rgb(22, 175, 202));
+                            }
+                        }
+                        selectedItem = position;
                     }
                 }
         );
+
     }
 
     @Override
@@ -84,7 +85,28 @@ public class HomeScreen extends AppCompatActivity {
             case R.id.action_add:
                 addAlbum();
                 return true;
-
+            case R.id.edit_album:
+                if(albumsListView.getCount() == 0 || selectedItem == -1) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No album was selected");
+                    DialogFragment newFragment = new AlbumDialogFragment();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(getFragmentManager(), "Album cannot be empty");
+                    return true;
+                }
+                editAlbum(selectedItem);
+                return true;
+            case R.id.open_album:
+                if(albumsListView.getCount() == 0 || selectedItem == -1) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No album was selected");
+                    DialogFragment newFragment = new AlbumDialogFragment();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(getFragmentManager(), "Album cannot be empty");
+                    return true;
+                }
+                openAlbum(selectedItem);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

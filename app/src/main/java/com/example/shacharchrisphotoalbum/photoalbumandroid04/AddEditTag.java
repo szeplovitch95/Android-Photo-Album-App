@@ -3,55 +3,62 @@ package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
-public class AddPhoto extends AppCompatActivity {
-    private int albumIndex;
-    private EditText photoName;
+public class AddEditTag extends AppCompatActivity {
+    private String tagType;
+    private String tagValue;
+    private EditText tagTypeEText;
+    private EditText tagValueEText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_photo);
+        setContentView(R.layout.activity_add_edit_tag);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        photoName = (EditText)findViewById(R.id.album_name);
+        tagTypeEText = (EditText)findViewById(R.id.tag_type);
+        tagValueEText = (EditText)findViewById(R.id.tag_value);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            tagTypeEText.setText(bundle.getString("tagType"));
+            tagValueEText.setText(bundle.getString("tagValue"));
+        }
     }
 
-    //cancels the activity
     public void cancel(View view) {
         setResult(Activity.RESULT_CANCELED);
         finish();
     }
 
-
-    //STILL NEEDS THE CORRECT IMPLEMENTATION ONCE KNOWING HOW AND FROM WHERE TO ADD PHOTOS TO THE APPLICATION.
     public void save(View view) {
-        String name = photoName.getText().toString();
+        tagType = tagTypeEText.getText().toString();
+        tagValue = tagValueEText.getText().toString();
 
-        //checks if input is valid
-        if (name == null || name.length() == 0) {
+        //checks if inputs are valid
+        if (tagType == null || tagType.length() == 0 || tagValue == null || tagValue.length() == 0) {
             Bundle bundle = new Bundle();
-            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Name is required");
+            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"All values are required");
             DialogFragment newFragment = new AlbumDialogFragment();
             newFragment.setArguments(bundle);
             newFragment.show(getFragmentManager(), "missing fields");
             return;
         }
 
-        //creates the bundle to be sent back to the caller
         Bundle bundle = new Bundle();
-        bundle.putInt("index", albumIndex);
-        bundle.putString("albumName",photoName.getText().toString());
+        bundle.putString("tagType", tagTypeEText.getText().toString());
+        bundle.putString("tagValue",tagValueEText.getText().toString());
 
         Intent intent = new Intent();
         intent.putExtras(bundle);
@@ -59,4 +66,3 @@ public class AddPhoto extends AppCompatActivity {
         finish();
     }
 }
-

@@ -73,8 +73,6 @@ public class PhotoChooser extends AppCompatActivity {
 //                toast.show();
             }
         });
-
-
     }
 
     public void cancel(View view) {
@@ -82,13 +80,12 @@ public class PhotoChooser extends AppCompatActivity {
         finish();
     }
 
-
     //STILL NEEDS THE CORRECT IMPLEMENTATION ONCE KNOWING HOW AND FROM WHERE TO ADD PHOTOS TO THE APPLICATION.
     public void save(View view) {
 
         if(selectedItem == -1) {
             Bundle bundle = new Bundle();
-            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Got to choose a picture");
+            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Choose a photo in order add it to the album");
             DialogFragment newFragment = new AlbumDialogFragment();
             newFragment.setArguments(bundle);
             newFragment.show(getFragmentManager(), "missing fields");

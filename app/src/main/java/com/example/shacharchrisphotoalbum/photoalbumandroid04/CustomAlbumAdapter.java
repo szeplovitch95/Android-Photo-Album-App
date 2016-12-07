@@ -39,7 +39,6 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
         albumTextView.setText(singleAlbumItem);
         albumSizeTextView.setText("Size: " + getItem(position).getSize() + "");
         ImageView deleteBtn = (ImageView) customView.findViewById(R.id.removeAlbumButton);
-        ImageView editBtn = (ImageView) customView.findViewById(R.id.editAlbumButton);
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +53,8 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
             }
         });
 
-        editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        deleteBtn.setFocusable(false);
+        deleteBtn.setFocusableInTouchMode(false);
 
 
         return customView;
@@ -68,4 +63,17 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
     public void saveData() throws IOException, ClassNotFoundException {
         User.write(mContext, user);
     }
+
+    @Override
+    public boolean isEnabled(int position)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean areAllItemsEnabled()
+    {
+        return true;
+    }
+
 }

@@ -14,7 +14,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <!--  Form -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -23,24 +22,35 @@
         android:padding="20dp"
         >
 
-        <!--  Name label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name: (required)"
+            android:text="Tag Type: (required)"
             android:textColor="@color/foreGreen"
             android:paddingBottom="2dp"/>
 
-        <!-- Name field -->
         <EditText
-            android:id="@+id/album_name"
+            android:id="@+id/tag_type"
+            android:layout_width="match_parent"
+            android:background="@android:drawable/editbox_background"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag Value: (required)"
+            android:textColor="@color/foreGreen"
+            android:paddingBottom="2dp"/>
+
+        <EditText
+            android:id="@+id/tag_value"
             android:layout_width="match_parent"
             android:background="@android:drawable/editbox_background"
             android:layout_height="wrap_content"
             />
 
 
-        <!--  Buttons for save and cancel -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -55,7 +65,7 @@
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@color/foreGreen"
-                android:text="Add Photo"
+                android:text="@string/save_label"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:onClick="save"

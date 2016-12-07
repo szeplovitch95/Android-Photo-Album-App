@@ -7,7 +7,7 @@
         appcompat:showAsAction="always" />
     <item android:id="@+id/action_menu_photo"
         android:icon="@drawable/ic_menu_black_24px"
-        android:title="@string/add"
+        android:title="@string/menu"
         appcompat:showAsAction="always">
         <menu>
             <item
