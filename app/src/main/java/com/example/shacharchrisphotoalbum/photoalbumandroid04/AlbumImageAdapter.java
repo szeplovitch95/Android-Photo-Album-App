@@ -55,6 +55,10 @@ public class AlbumImageAdapter extends BaseAdapter {
         return this.mThumbIds;
     }
 
+    public void setmThumbIds(List<Integer> photos) {
+        this.mThumbIds = photos;
+    }
+
     public void addPicture(Integer ref) {
         mThumbIds.add(ref);
     }

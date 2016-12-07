@@ -24,7 +24,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeScreen" />
         </activity>
-        <activity android:name=".SearchPhotosScreen" />
+        <activity android:name=".SearchPhotosScreen">
+            android:parentActivityName=".HomeScreen"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
         <activity android:name=".AddEditAlbum" />
         <activity android:name=".SlideshowScreen">
             android:parentActivityName=".HomeScreen"
@@ -50,7 +55,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeScreen" />
         </activity>
-        <activity android:name=".AddEditTag"></activity>
+        <activity android:name=".AddEditTag" />
+        <activity android:name=".SearchResults">
+            android:parentActivityName=".SearchPhotosScreen"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchPhotosScreen" />
+        </activity>
     </application>
 
 </manifest>

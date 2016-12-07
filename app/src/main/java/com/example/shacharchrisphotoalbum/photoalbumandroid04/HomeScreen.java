@@ -107,6 +107,18 @@ public class HomeScreen extends AppCompatActivity {
                 }
                 openAlbum(selectedItem);
                 return true;
+
+            case R.id.search_photos:
+                if(albumsListView.getCount() == 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Cannot search on an empty album");
+                    DialogFragment newFragment = new AlbumDialogFragment();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(getFragmentManager(), "Album cannot be empty");
+                    return true;
+                }
+                searchPhotos();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -129,7 +141,6 @@ public class HomeScreen extends AppCompatActivity {
         intent.putExtras(bundle);
 
         startActivityForResult(intent, OPEN_ALBUM_CODE);
-
     }
 
     public void editAlbum(int pos) {
@@ -175,8 +186,10 @@ public class HomeScreen extends AppCompatActivity {
         }
     }
 
-    public void searchPhotos() {
 
+    public void searchPhotos() {
+        Intent intent = new Intent(getApplicationContext(), SearchPhotosScreen.class);
+        startActivityForResult(intent, SEARCH_ALL_PHOTOS);
     }
 
     public void saveData() throws IOException, ClassNotFoundException {

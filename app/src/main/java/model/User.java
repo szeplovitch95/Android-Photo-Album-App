@@ -68,6 +68,24 @@ public class User implements Serializable {
         return albumList;
     }
 
+    public List<Integer> searchPhotos(String type, String value) {
+        List<Integer> resultPhotos = new ArrayList<Integer>();
+
+        for(Album a : albums) {
+            for(Photo p : a.getPhotos()) {
+                for(Tag t : p.getTags()) {
+                    if(t.getTagType().equals(type)) {
+                        if(t.getTagValue().startsWith(value)) {
+                            resultPhotos.add(p.getImageRef());
+                        }
+                    }
+                }
+            }
+        }
+
+        return resultPhotos;
+    }
+
     public static User read(Context context) throws IOException, ClassNotFoundException {
         FileInputStream fis = context.openFileInput(storeFile);
         ObjectInputStream ois = new ObjectInputStream(fis);
