@@ -15,6 +15,7 @@ public class AddEditTag extends AppCompatActivity {
     private String tagValue;
     private EditText tagTypeEText;
     private EditText tagValueEText;
+    private int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class AddEditTag extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+
         tagTypeEText = (EditText)findViewById(R.id.tag_type);
         tagValueEText = (EditText)findViewById(R.id.tag_value);
 
@@ -32,7 +34,10 @@ public class AddEditTag extends AppCompatActivity {
         if(bundle != null) {
             tagTypeEText.setText(bundle.getString("tagType"));
             tagValueEText.setText(bundle.getString("tagValue"));
+            pos = bundle.getInt("pos");
         }
+
+
     }
 
     public void cancel(View view) {
@@ -58,6 +63,7 @@ public class AddEditTag extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("tagType", tagTypeEText.getText().toString());
             bundle.putString("tagValue", tagValueEText.getText().toString());
+            bundle.putInt("pos", pos);
             Intent intent = new Intent();
             intent.putExtras(bundle);
             setResult(RESULT_OK, intent);

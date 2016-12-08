@@ -70,22 +70,13 @@ public class AlbumScreen extends AppCompatActivity {
 
         gridview.setAdapter(myImgAdapter);
         nameOfAlbum = (TextView) findViewById(R.id.nameOfAlbum);
-        nameOfAlbum.setText("Album Name: " + currentAlbumOpen.getAlbumName());
+        nameOfAlbum.setText("" + currentAlbumOpen.getAlbumName());
         sizeOfAlbum = (TextView) findViewById(R.id.sizeOfAlbum);
-        sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
+        sizeOfAlbum.setText("Size: " + currentAlbumOpen.getSize());
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                selectedItem = position;
-                for (int i = 0; i < myImgAdapter.getCount(); i++) {
-                    if(gridview.getChildAt(i) == null) break;
-                    if(position == i ) {
-                        gridview.getChildAt(i).setBackgroundColor(Color.RED);
-                    }
-                    else{
-                        gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-                    }
-                }
+                manageTags(position);
             }
         });
     }

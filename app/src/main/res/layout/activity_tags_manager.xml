@@ -42,18 +42,6 @@
             android:textStyle="normal|bold|italic" />
 
         <Button
-            android:text="Edit"
-            android:layout_width="78dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTagBtn" />
-
-        <Button
-            android:text="Remove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tagRemoveBtn" />
-
-        <Button
             android:text="Add"
             android:layout_width="76dp"
             android:layout_height="wrap_content"
@@ -61,10 +49,11 @@
             android:elevation="8dp" />
     </LinearLayout>
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:layout_width="match_parent"
         android:layout_height="178dp"
-        android:id="@+id/tagsListVIew" />
+        android:id="@+id/tagsListView"
+        android:dividerHeight="4dp" />
 
 
 </LinearLayout>

@@ -6,20 +6,8 @@
         android:icon="@drawable/ic_add_black_24px"
         android:title="@string/add"
         appcompat:showAsAction="always" />
-    <item android:id="@+id/action_menu_photo"
-        android:icon="@drawable/ic_menu_black_24px"
-        android:title="@string/menu"
-        appcompat:showAsAction="always">
-        <menu>
-            <item
-                android:id="@+id/edit_album"
-                android:title="Edit Album" />
-            <item
-                android:id="@+id/search_photos"
-                android:title="Search Photos" />
-            <item
-                android:id="@+id/open_album"
-                android:title="Open Album" />
-        </menu>
-    </item>
+    <item android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_black_24px"
+        android:title="@string/add"
+        appcompat:showAsAction="always" />
 </menu>

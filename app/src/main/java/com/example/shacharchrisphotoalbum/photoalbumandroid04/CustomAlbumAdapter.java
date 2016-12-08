@@ -1,6 +1,9 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,7 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
     private List<Album> albumList;
     private Context mContext;
     private User user;
+    private ImageView editBtn;
 
     public CustomAlbumAdapter(Context context, List<Album> albums, User user) {
         super(context, R.layout.custom_album_row, albums);
@@ -33,29 +37,9 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
         LayoutInflater myInflater = LayoutInflater.from(getContext());
         View customView = myInflater.inflate(R.layout.custom_album_row, parent, false);
 
-        String singleAlbumItem = getItem(position).getAlbumName();
+        final String singleAlbumItem = getItem(position).getAlbumName();
         TextView albumTextView = (TextView) customView.findViewById(R.id.albumNameTextView);
-        TextView albumSizeTextView = (TextView) customView.findViewById(R.id.albumSize);
         albumTextView.setText(singleAlbumItem);
-        albumSizeTextView.setText("Size: " + getItem(position).getSize() + "");
-        ImageView deleteBtn = (ImageView) customView.findViewById(R.id.removeAlbumButton);
-
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                albumList.remove(position);
-                notifyDataSetChanged();
-                try {
-                    saveData();
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        deleteBtn.setFocusable(false);
-        deleteBtn.setFocusableInTouchMode(false);
-
 
         return customView;
     }
