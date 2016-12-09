@@ -1,8 +1,6 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
-import android.app.DialogFragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,7 +24,6 @@ public class HomeScreen extends AppCompatActivity {
     private Toolbar myToolbar;
     private User user;
     private ListAdapter listAdapter;
-    int selectedItem = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +55,10 @@ public class HomeScreen extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        for(int i = 0; i < listAdapter.getCount(); i++) {
-                            if(albumsListView.getChildAt(i) == null) break;
-                            if(position == i) {
-                                albumsListView.getChildAt(i).setBackgroundColor(Color.rgb(15,122,141));
-                            } else {
-                                albumsListView.getChildAt(i).setBackgroundColor(Color.rgb(22, 175, 202));
-                            }
-                        }
-                        selectedItem = position;
+                        openAlbum(position);
                     }
                 }
         );
-
     }
 
     @Override
@@ -85,40 +73,8 @@ public class HomeScreen extends AppCompatActivity {
             case R.id.action_add:
                 addAlbum();
                 return true;
-            case R.id.edit_album:
-                if(albumsListView.getCount() == 0 || selectedItem == -1) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No album was selected");
-                    DialogFragment newFragment = new AlbumDialogFragment();
-                    newFragment.setArguments(bundle);
-                    newFragment.show(getFragmentManager(), "Album cannot be empty");
-                    return true;
-                }
-                editAlbum(selectedItem);
-                return true;
-            case R.id.open_album:
-                if(albumsListView.getCount() == 0 || selectedItem == -1) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No album was selected");
-                    DialogFragment newFragment = new AlbumDialogFragment();
-                    newFragment.setArguments(bundle);
-                    newFragment.show(getFragmentManager(), "Album cannot be empty");
-                    return true;
-                }
-                openAlbum(selectedItem);
-                return true;
-
-            case R.id.search_photos:
-                if(albumsListView.getCount() == 0) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Cannot search on an empty album");
-                    DialogFragment newFragment = new AlbumDialogFragment();
-                    newFragment.setArguments(bundle);
-                    newFragment.show(getFragmentManager(), "Album cannot be empty");
-                    return true;
-                }
+            case R.id.action_search_photo:
                 searchPhotos();
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -141,19 +97,6 @@ public class HomeScreen extends AppCompatActivity {
         intent.putExtras(bundle);
 
         startActivityForResult(intent, OPEN_ALBUM_CODE);
-    }
-
-    public void editAlbum(int pos) {
-        Bundle bundle = new Bundle();
-        Album album = user.getAlbums().get(pos);
-
-        //sets up the bundle to be sent to the AddEditAlbum class
-        bundle.putString("albumName", album.getAlbumName());
-        bundle.putInt("index", pos);
-
-        Intent intent = new Intent(getApplicationContext(), AddEditAlbum.class);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, EDIT_ALBUM_CODE);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {

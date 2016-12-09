@@ -26,11 +26,9 @@ public class AlbumScreen extends AppCompatActivity {
     public static final int MOVE_TO_CODE = 4;
     private Album currentAlbumOpen;
     private User user;
-    private Toolbar myToolbar;
     private TextView nameOfAlbum;
     private TextView sizeOfAlbum;
     private AlbumImageAdapter myImgAdapter;
-    private int selectedItem = -1;
     private GridView gridview;
 
     @Override
@@ -81,15 +79,7 @@ public class AlbumScreen extends AppCompatActivity {
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                selectedItem = position;
-                for (int i = 0; i < myImgAdapter.getCount(); i++) {
-                    if(gridview.getChildAt(i) == null) break;
-                    if(position == i ){
-                        gridview.getChildAt(i).setBackgroundColor(Color.RED);
-                    }else{
-                        gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-                    }
-                }
+                manageTags(position);
             }
         });
     }
@@ -106,58 +96,6 @@ public class AlbumScreen extends AppCompatActivity {
             case R.id.action_add_photo:
                 addPhoto();
                 return true;
-
-            case R.id.manageTags:
-                if(myImgAdapter.getCount() == 0) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No photo was selected or/and album is empty");
-                    DialogFragment newFragment = new AlbumDialogFragment();
-                    newFragment.setArguments(bundle);
-                    newFragment.show(getFragmentManager(), "Album cannot be empty");
-                    return true;
-                }
-
-                manageTags(selectedItem);
-                return true;
-
-            case R.id.removePhoto:
-                if(myImgAdapter.getCount() == 0 || selectedItem == -1) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No photo was selected or/and album is empty");
-                    DialogFragment newFragment = new AlbumDialogFragment();
-                    newFragment.setArguments(bundle);
-                    newFragment.show(getFragmentManager(), "Album cannot be empty");
-                    return true;
-                }
-
-                removePhoto(selectedItem);
-                return true;
-
-            case R.id.movePhoto:
-                if(myImgAdapter.getCount() == 0) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No photo was selected or/and album is empty");
-                    DialogFragment newFragment = new AlbumDialogFragment();
-                    newFragment.setArguments(bundle);
-                    newFragment.show(getFragmentManager(), "Album cannot be empty");
-                    return true;
-                }
-
-                movePhoto(selectedItem);
-                return true;
-
-            case R.id.slideshow:
-                if(myImgAdapter.getCount() == 0) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Album is empty");
-                    DialogFragment newFragment = new AlbumDialogFragment();
-                    newFragment.setArguments(bundle);
-                    newFragment.show(getFragmentManager(), "Album cannot be empty");
-                    return true;
-                }
-                openSlideShow();
-                return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -168,55 +106,12 @@ public class AlbumScreen extends AppCompatActivity {
         startActivityForResult(intent, ADD_PHOTO_CODE);
     }
 
-    public void openSlideShow() {
-        Bundle bundle = new Bundle();
-        Album album = currentAlbumOpen;
-
-        bundle.putString("albumName", album.getAlbumName());
-        bundle.putInt("albumIndex", selectedItem);
-
-        Intent intent = new Intent(getApplicationContext(), SlideshowScreen.class);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, SLIDESHOW_CODE);
-    }
-
-    public void movePhoto(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putString("albumName", currentAlbumOpen.getAlbumName());
-        Intent intent = new Intent(getApplicationContext(), MoveToAlbum.class);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, MOVE_TO_CODE);
-    }
-
-    // still needs more implementation to work perfectly.
-    // fix this so when you move a photo that already exists, you remove the right
-    // photo and have no problems with the index. VERY IMPORTANT.
-    public void removePhoto(int position) {
-        Integer ref = myImgAdapter.getItem(position);
-        myImgAdapter.removePicture(ref);
-        myImgAdapter.notifyDataSetChanged();
-        currentAlbumOpen.removePhotoByRef(ref);
-        sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
-        selectedItem = -1;
-
-        try {
-            saveData();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        for (int i = 0; i < myImgAdapter.getCount(); i++) {
-            if(gridview.getChildAt(i) == null) break;
-            gridview.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-        }
-    }
-
     public void manageTags(int position) {
         Bundle bundle = new Bundle();
         Album album = currentAlbumOpen;
 
         bundle.putString("albumName", album.getAlbumName());
-        bundle.putInt("albumIndex", selectedItem);
+        bundle.putInt("albumIndex", position);
 
         Intent intent = new Intent(getApplicationContext(), TagsManager.class);
         intent.putExtras(bundle);
@@ -241,19 +136,6 @@ public class AlbumScreen extends AppCompatActivity {
             sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
         }
 
-        else if(requestCode == MOVE_TO_CODE) {
-            Bundle bundle = intent.getExtras();
-            String albumRef = bundle.getString("albumRefName");
-            Integer ref = myImgAdapter.getItem(selectedItem);
-            Album a = user.getAlbumByName(albumRef);
-            a.addPhoto(currentAlbumOpen.getPhotos().get(selectedItem));
-
-            myImgAdapter.removePicture(ref);
-            myImgAdapter.notifyDataSetChanged();
-            currentAlbumOpen.removePhotoByRef(ref);
-            sizeOfAlbum.setText("Album's Size: " + currentAlbumOpen.getSize());
-            selectedItem = -1;
-        }
 
         else if(requestCode == MANAGE_TAGS_CODE) {
 

@@ -38,6 +38,10 @@ public class TagsManager extends AppCompatActivity {
     private Button addTagBtn;
     private Button removeTagBtn;
     private Button editTagBtn;
+    private Button removeBtn;
+    private Button slideshowBtn;
+    private Button moveBtn;
+
     private ListView tagsListView;
     private List<String> tags = new ArrayList<String>();
     int selectedIndex = -1;
@@ -75,6 +79,11 @@ public class TagsManager extends AppCompatActivity {
         editTagBtn = (Button) findViewById(R.id.editTagBtn);
         tagsListView = (ListView) findViewById(R.id.tagsListVIew);
         singleImageView.setImageResource(currentPhoto.getImageRef());
+
+        removeBtn = (Button) findViewById(R.id.removeBtn);
+        slideshowBtn = (Button) findViewById(R.id.slideshowBtn);
+        moveBtn = (Button) findViewById(R.id.moveBtn);
+
 
         for(Tag t : currentPhoto.getTags()) {
             tags.add(" - " + t.getTagType()+ ", " + t.getTagValue());
@@ -144,6 +153,56 @@ public class TagsManager extends AppCompatActivity {
                     }
                 }
         );
+
+        removeBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        removePhoto();
+                    }
+                }
+        );
+
+        slideshowBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openSlideshow();
+                    }
+                }
+        );
+
+        moveBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        movePhoto();
+                    }
+                }
+        );
+    }
+
+    public void removePhoto(){
+        currentAlbum.removePhoto(currentPhoto);
+        Intent intent = new Intent(getApplicationContext(), AlbumScreen.class);
+        intent.putExtra("albumName", currentAlbum.getAlbumName());
+        startActivity(intent);
+    }
+
+    public void movePhoto() {
+        Bundle bundle = new Bundle();
+        bundle.putString("albumName", currentAlbum.getAlbumName());
+        Intent intent = new Intent(getApplicationContext(), MoveToAlbum.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, AlbumScreen.MOVE_TO_CODE);
+    }
+
+    public void openSlideshow() {
+        Bundle bundle = new Bundle();
+        bundle.putString("albumName", currentAlbum.getAlbumName());
+        Intent intent = new Intent(getApplicationContext(), SlideshowScreen.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void addTag() {
@@ -233,6 +292,18 @@ public class TagsManager extends AppCompatActivity {
 
             adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tags);
             tagsListView.setAdapter(adapter);
+        }
+
+        if(requestCode == AlbumScreen.MOVE_TO_CODE) {
+            Bundle bundleData = data.getExtras();
+            String albumRef = bundleData.getString("albumRefName");
+            Album a = user.getAlbumByName(albumRef);
+            a.addPhoto(currentPhoto);
+            currentAlbum.removePhoto(currentPhoto);
+
+            Intent intent = new Intent(getApplicationContext(), AlbumScreen.class);
+            intent.putExtra("albumName", currentAlbum.getAlbumName());
+            startActivity(intent);
         }
 
         try {
