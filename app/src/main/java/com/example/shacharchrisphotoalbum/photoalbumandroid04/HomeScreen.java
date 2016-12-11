@@ -128,8 +128,7 @@ public class HomeScreen extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
+    
     public void searchPhotos() {
         Intent intent = new Intent(getApplicationContext(), SearchPhotosScreen.class);
         startActivityForResult(intent, SEARCH_ALL_PHOTOS);
