@@ -4,20 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#16AFCA"
     android:orientation="horizontal"
     android:minHeight="@dimen/list_item_height"
     android:descendantFocusability="blocksDescendants">
 
-    <TextView
-        android:id="@+id/albumNameTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:layout_width="220dp"
         android:layout_weight="0.91"
-        android:layout_gravity="top"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        tools:text="one"
-        android:textIsSelectable="false"
-        android:paddingTop="20dp"
-        android:paddingLeft="25dp" />
+>
+
+        <TextView
+            android:id="@+id/albumNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="top"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white"
+            tools:text="one"
+            android:textIsSelectable="false"/>
+
+        <TextView
+            android:id="@+id/albumSize"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            tools:text="lutti"
+            android:textIsSelectable="false"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/ic_mode_edit_white_24px"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/editAlbumButton"
+        />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/ic_delete_forever_white_24px"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/removeAlbumButton"
+        />
 
 </LinearLayout>

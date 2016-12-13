@@ -1,6 +1,7 @@
 package model;
 
 import android.content.Context;
+import android.net.Uri;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -66,8 +67,8 @@ public class User implements Serializable {
         return albumList;
     }
 
-    public List<Integer> searchPhotos(String type, String value) {
-        List<Integer> resultPhotos = new ArrayList<Integer>();
+    public List<String> searchPhotos(String type, String value) {
+        List<String> resultPhotos = new ArrayList<String>();
 
         for(Album a : albums) {
             for(Photo p : a.getPhotos()) {

@@ -3,7 +3,9 @@
     package="com.example.shacharchrisphotoalbum.photoalbumandroid04">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="21" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +32,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeScreen" />
         </activity>
-        <activity android:name=".AddEditAlbum" />
+        <activity android:name=".AddEditAlbum">
+            android:parentActivityName=".HomeScreen"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
         <activity android:name=".SlideshowScreen">
             android:parentActivityName=".HomeScreen"
             <meta-data

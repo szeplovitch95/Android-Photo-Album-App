@@ -24,7 +24,7 @@
         android:layout_height="237dp"
         android:id="@+id/albums_list_view"
         android:choiceMode="singleChoice"
-        android:listSelector="@android:color/background_light"
+        android:listSelector="@android:color/darker_gray"
         android:layout_weight="0.82">
 
     </ListView>

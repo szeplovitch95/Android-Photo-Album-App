@@ -25,8 +25,7 @@ public class AddEditTag extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
-
+        
         tagTypeEText = (EditText)findViewById(R.id.tag_type);
         tagValueEText = (EditText)findViewById(R.id.tag_value);
 
@@ -36,8 +35,6 @@ public class AddEditTag extends AppCompatActivity {
             tagValueEText.setText(bundle.getString("tagValue"));
             pos = bundle.getInt("pos");
         }
-
-
     }
 
     public void cancel(View view) {
@@ -71,7 +68,7 @@ public class AddEditTag extends AppCompatActivity {
         }
         else {
             Bundle bundle = new Bundle();
-            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Tag Type must be either Location or Person");
+            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Tag Type must be either location or person  (lowercase)");
             DialogFragment newFragment = new AlbumDialogFragment();
             newFragment.setArguments(bundle);
             newFragment.show(getFragmentManager(), "missing fields");

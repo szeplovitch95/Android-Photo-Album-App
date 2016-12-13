@@ -20,6 +20,34 @@
         android:layout_weight="0.07"
         android:layout_marginBottom="10dp" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07">
+
+        <Button
+            android:text="Slideshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/slideshowBtn"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Move"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/moveBtn"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/removeBtn"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +70,18 @@
             android:textStyle="normal|bold|italic" />
 
         <Button
+            android:text="Edit"
+            android:layout_width="78dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTagBtn" />
+
+        <Button
+            android:text="Remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tagRemoveBtn" />
+
+        <Button
             android:text="Add"
             android:layout_width="76dp"
             android:layout_height="wrap_content"
@@ -49,11 +89,10 @@
             android:elevation="8dp" />
     </LinearLayout>
 
-    <com.baoyz.swipemenulistview.SwipeMenuListView
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="178dp"
-        android:id="@+id/tagsListView"
-        android:dividerHeight="4dp" />
+        android:layout_height="133dp"
+        android:id="@+id/tagsListVIew" />
 
 
 </LinearLayout>

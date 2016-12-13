@@ -1,24 +1,26 @@
 package model;
 
+import android.net.Uri;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Photo implements Serializable {
-    private Integer imageRef;
+    private String imageRef;
     private List<Tag> tags;
 
-    public Photo(Integer imageFile) {
+    public Photo(String imageFile) {
         this.imageRef = imageFile;
         this.tags = new ArrayList<Tag>();
     }
 
-    public Integer getImageRef() {
+    public String getImageRef() {
         return imageRef;
     }
 
-    public void setImageRef(Integer imageFile) {
+    public void setImageRef(String imageFile) {
         this.imageRef = imageFile;
     }
 

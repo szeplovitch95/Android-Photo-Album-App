@@ -1,6 +1,8 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
 
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -13,17 +15,18 @@ import java.util.List;
 
 public class AlbumImageAdapter extends BaseAdapter {
     private Context mContext;
-    private List<Integer> mThumbIds = new ArrayList<Integer>();
+    private List<String> mThumbIds = new ArrayList<String>();
 
-    public AlbumImageAdapter(Context c) {
+    public AlbumImageAdapter(Context c, List<String> images) {
         mContext = c;
+        this.mThumbIds = images;
     }
 
     public int getCount() {
         return mThumbIds.size();
     }
 
-    public Integer getItem(int position) {
+    public String getItem(int position) {
         return this.mThumbIds.get(position);
     }
 
@@ -43,27 +46,29 @@ public class AlbumImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds.get(position));
+
+
+        imageView.setImageBitmap(BitmapFactory.decodeFile(mThumbIds.get(position)));
         return imageView;
     }
 
-    public Integer getImgID(int position){
+    public String getImgID(int position){
         return mThumbIds.get(position);
     }
 
-    public List<Integer> getmThumbIds() {
+    public List<String> getmThumbIds() {
         return this.mThumbIds;
     }
 
-    public void setmThumbIds(List<Integer> photos) {
+    public void setmThumbIds(List<String> photos) {
         this.mThumbIds = photos;
     }
 
-    public void addPicture(Integer ref) {
+    public void addPicture(String ref) {
         mThumbIds.add(ref);
     }
 
-    public void removePicture(Integer ref) {
+    public void removePicture(Uri ref) {
         mThumbIds.remove(ref);
     }
 }

@@ -22,7 +22,6 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
     private List<Album> albumList;
     private Context mContext;
     private User user;
-    private ImageView editBtn;
 
     public CustomAlbumAdapter(Context context, List<Album> albums, User user) {
         super(context, R.layout.custom_album_row, albums);
@@ -32,14 +31,49 @@ class CustomAlbumAdapter extends ArrayAdapter<Album>{
 
     @NonNull
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         mContext = parent.getContext();
         LayoutInflater myInflater = LayoutInflater.from(getContext());
         View customView = myInflater.inflate(R.layout.custom_album_row, parent, false);
 
-        final String singleAlbumItem = getItem(position).getAlbumName();
+        String singleAlbumItem = getItem(position).getAlbumName();
         TextView albumTextView = (TextView) customView.findViewById(R.id.albumNameTextView);
+        TextView albumSizeTextView = (TextView) customView.findViewById(R.id.albumSize);
         albumTextView.setText(singleAlbumItem);
+        albumSizeTextView.setText("Size: " + getItem(position).getSize() + "");
+        ImageView deleteBtn = (ImageView) customView.findViewById(R.id.removeAlbumButton);
+        ImageView editBtn = (ImageView) customView.findViewById(R.id.editAlbumButton);
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                albumList.remove(position);
+                notifyDataSetChanged();
+                try {
+                    saveData();
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        editBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("albumName", getItem(position).getAlbumName());
+                        bundle.putInt("index", position);
+                        Intent intent = new Intent(mContext.getApplicationContext(), AddEditAlbum.class);
+                        intent.putExtras(bundle);
+                        ((Activity)mContext).startActivityForResult(intent, HomeScreen.EDIT_ALBUM_CODE);
+                    }
+                }
+        );
+
+        deleteBtn.setFocusable(false);
+        deleteBtn.setFocusableInTouchMode(false);
+
 
         return customView;
     }

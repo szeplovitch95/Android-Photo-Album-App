@@ -1,5 +1,8 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -49,7 +52,7 @@ public class SlideshowScreen extends AppCompatActivity {
         previousBtn = (Button) findViewById(R.id.previousBtn);
         nextBtn = (Button) findViewById(R.id.nextBtn);
         imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setImageResource(currentAlbum.getPhotos().get(currentIndex).getImageRef());
+        imageView.setImageBitmap(BitmapFactory.decodeFile(currentAlbum.getPhotos().get(currentIndex).getImageRef()));
 
         previousBtn.setOnClickListener(
                 new View.OnClickListener() {
@@ -58,7 +61,7 @@ public class SlideshowScreen extends AppCompatActivity {
                         if(currentIndex - 1 < 0) return;
                         Photo p = currentAlbum.previousPhoto(currentAlbum.getPhotos().get(--currentIndex));
                         if(p == null) return;
-                        imageView.setImageResource(currentAlbum.getPhotos().get(currentIndex).getImageRef());
+                        imageView.setImageBitmap(BitmapFactory.decodeFile(currentAlbum.getPhotos().get(currentIndex).getImageRef()));
                     }
                 }
         );
@@ -70,7 +73,7 @@ public class SlideshowScreen extends AppCompatActivity {
                         if(currentIndex + 1 >= currentAlbum.getSize()) return;
                         Photo p = currentAlbum.getPhotos().get(++currentIndex);
                         if(p == null) return;
-                        imageView.setImageResource(currentAlbum.getPhotos().get(currentIndex).getImageRef());
+                        imageView.setImageBitmap(BitmapFactory.decodeFile(currentAlbum.getPhotos().get(currentIndex).getImageRef()));
                     }
                 }
         );

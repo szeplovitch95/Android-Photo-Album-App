@@ -18,11 +18,12 @@
         android:background="?attr/colorPrimary"
         android:id="@+id/my_toolbar"
         app:title="Photo Album Application" />
-
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/albums_listView"
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="4dp" />
+        android:id="@+id/albums_list_view"
+        android:choiceMode="singleChoice">
+
+    </ListView>
 
 </LinearLayout>

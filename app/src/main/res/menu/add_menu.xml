@@ -6,8 +6,8 @@
         android:icon="@drawable/ic_add_black_24px"
         android:title="@string/add"
         appcompat:showAsAction="always" />
-    <item android:id="@+id/action_search"
+    <item android:id="@+id/action_search_photo"
         android:icon="@drawable/ic_search_black_24px"
-        android:title="@string/add"
+        android:title="@string/menu"
         appcompat:showAsAction="always" />
 </menu>

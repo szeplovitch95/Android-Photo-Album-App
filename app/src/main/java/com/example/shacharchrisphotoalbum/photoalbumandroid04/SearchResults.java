@@ -1,5 +1,6 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class SearchResults extends AppCompatActivity {
     private TextView tag_desc;
     private GridView gridView;
     private AlbumImageAdapter myImgAdapter;
-    private List<Integer> photosResult = new ArrayList<Integer>();
+    private List<String> photosResult = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,7 @@ public class SearchResults extends AppCompatActivity {
                 bundle.getString("tagValue"));
 
         photosResult = user.searchPhotos(bundle.getString("tagType"), bundle.getString("tagValue"));
-        myImgAdapter = new AlbumImageAdapter(this);
-        myImgAdapter.setmThumbIds(photosResult);
+        myImgAdapter = new AlbumImageAdapter(this, photosResult);
 
         gridView.setAdapter(myImgAdapter);
     }

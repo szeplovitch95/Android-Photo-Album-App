@@ -1,5 +1,7 @@
 package model;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +54,7 @@ public class Album implements Serializable {
         return photos.contains(photo);
     }
 
-    public void removePhotoByRef(Integer ref) {
+    public void removePhotoByRef(Uri ref) {
         for(Photo p : photos) {
             if(p.getImageRef().equals(ref)) {
                 removePhoto(p);
