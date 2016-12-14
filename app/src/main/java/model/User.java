@@ -3,6 +3,8 @@ package model;
 import android.content.Context;
 import android.net.Uri;
 
+import com.example.shacharchrisphotoalbum.photoalbumandroid04.PhotoSRO;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -67,15 +69,16 @@ public class User implements Serializable {
         return albumList;
     }
 
-    public List<String> searchPhotos(String type, String value) {
-        List<String> resultPhotos = new ArrayList<String>();
+    public List<PhotoSRO> searchPhotos(String type, String value) {
+        List<PhotoSRO> resultPhotos = new ArrayList<PhotoSRO>();
 
         for(Album a : albums) {
             for(Photo p : a.getPhotos()) {
                 for(Tag t : p.getTags()) {
                     if(t.getTagType().equals(type)) {
                         if(t.getTagValue().startsWith(value)) {
-                            resultPhotos.add(p.getImageRef());
+                            resultPhotos.add(new PhotoSRO(p, a));
+                            PhotoSRO.allphotos.add(p.getImageRef());
                         }
                     }
                 }

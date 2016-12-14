@@ -40,6 +40,16 @@ public class Album implements Serializable {
         this.size = size;
     }
 
+    public Photo getPhotoByRef(String ref) {
+        for(Photo p: photos) {
+            if(p.getImageRef().equals(ref)) {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
     public void addPhoto(Photo photo) {
         photos.add(photo);
         size++;

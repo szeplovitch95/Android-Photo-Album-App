@@ -62,13 +62,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeScreen" />
         </activity>
-        <activity android:name=".AddEditTag" />
+        <activity android:name=".AddEditTag">
+            android:parentActivityName=".HomeScreen"
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
         <activity android:name=".SearchResults">
             android:parentActivityName=".SearchPhotosScreen"
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SearchPhotosScreen" />
         </activity>
+        <activity android:name=".PhotoResult_Info"></activity>
     </application>
 
 </manifest>
