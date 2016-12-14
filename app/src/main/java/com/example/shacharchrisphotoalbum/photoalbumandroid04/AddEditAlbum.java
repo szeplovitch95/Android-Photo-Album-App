@@ -10,9 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import java.io.IOException;
+import model.User;
+
 public class AddEditAlbum extends AppCompatActivity {
     private int albumIndex;
     private EditText albumName;
+    private User user;
+    private boolean isEditMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +28,17 @@ public class AddEditAlbum extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        try {
+            user = User.read(getApplicationContext());
+        } catch (IOException | ClassNotFoundException o) {
+            o.printStackTrace();
+        }
+
         albumName = (EditText)findViewById(R.id.album_name);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
+            isEditMode = true;
             albumIndex = bundle.getInt("index");
             albumName.setText(bundle.getString("albumName"));
         }
@@ -45,6 +57,15 @@ public class AddEditAlbum extends AppCompatActivity {
         if (name == null || name.length() == 0) {
             Bundle bundle = new Bundle();
             bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Name is required");
+            DialogFragment newFragment = new AlbumDialogFragment();
+            newFragment.setArguments(bundle);
+            newFragment.show(getFragmentManager(), "missing fields");
+            return;
+        }
+
+        if(user.getAlbumByName(name) != null && !isEditMode) {
+            Bundle bundle = new Bundle();
+            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Album name already exists.\n Please choose another name");
             DialogFragment newFragment = new AlbumDialogFragment();
             newFragment.setArguments(bundle);
             newFragment.show(getFragmentManager(), "missing fields");
