@@ -53,7 +53,7 @@ public class SearchPhotosScreen extends AppCompatActivity {
     }
 
     public void searchPhotos() {
-        if(tagTypeEText.getText().toString().trim().equals("location") || tagTypeEText.getText().toString().trim().equals("person")) {
+        if(tagTypeEText.getText().toString().trim().equalsIgnoreCase("location") || tagTypeEText.getText().toString().trim().equalsIgnoreCase("person")) {
             if(tagValueEText.getText().toString() != null && tagValueEText.getText().toString().trim().length() > 0) {
                 Bundle bundle = new Bundle();
                 bundle.putString("tagType", tagTypeEText.getText().toString().trim());

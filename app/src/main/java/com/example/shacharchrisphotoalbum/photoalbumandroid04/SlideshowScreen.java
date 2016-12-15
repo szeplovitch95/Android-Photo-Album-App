@@ -1,8 +1,6 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;

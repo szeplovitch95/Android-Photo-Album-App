@@ -75,12 +75,13 @@ public class User implements Serializable {
         List<PhotoSRO> resultPhotos = new ArrayList<PhotoSRO>();
 
         for(Album a : albums) {
-            for(Photo p : a.getPhotos()) {
+            INNER: for(Photo p : a.getPhotos()) {
                 for(Tag t : p.getTags()) {
-                    if(t.getTagType().equals(type)) {
+                    if(t.getTagType().equalsIgnoreCase(type)) {
                         if(t.getTagValue().startsWith(value)) {
                             resultPhotos.add(new PhotoSRO(p, a));
                             PhotoSRO.allphotos.add(p.getImageRef());
+                            break INNER;
                         }
                     }
                 }

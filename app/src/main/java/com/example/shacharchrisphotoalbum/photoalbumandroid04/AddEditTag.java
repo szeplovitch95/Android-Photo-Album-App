@@ -56,7 +56,7 @@ public class AddEditTag extends AppCompatActivity {
             return;
         }
 
-        if(tagType.equals("person") || tagType.equals("location")) {
+        if(tagType.trim().equalsIgnoreCase("person") || tagType.trim().equalsIgnoreCase("location")) {
             Bundle bundle = new Bundle();
             bundle.putString("tagType", tagTypeEText.getText().toString());
             bundle.putString("tagValue", tagValueEText.getText().toString());
@@ -68,7 +68,7 @@ public class AddEditTag extends AppCompatActivity {
         }
         else {
             Bundle bundle = new Bundle();
-            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Tag Type must be either location or person  (lowercase)");
+            bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"Tag Type must be either location or person");
             DialogFragment newFragment = new AlbumDialogFragment();
             newFragment.setArguments(bundle);
             newFragment.show(getFragmentManager(), "missing fields");
