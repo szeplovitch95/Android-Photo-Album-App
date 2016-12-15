@@ -33,6 +33,7 @@ public class HomeScreen extends AppCompatActivity {
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+
         try {
             user = User.read(getApplicationContext());
         } catch (IOException | ClassNotFoundException o) {

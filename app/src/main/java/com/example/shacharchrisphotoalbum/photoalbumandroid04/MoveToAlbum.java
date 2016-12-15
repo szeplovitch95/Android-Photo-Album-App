@@ -75,7 +75,6 @@ public class MoveToAlbum extends AppCompatActivity {
     }
 
     public void save(View view) {
-
         if (selectedItem == -1) {
             Bundle bundle = new Bundle();
             bundle.putString(AlbumDialogFragment.MESSAGE_KEY,"No album was selected");

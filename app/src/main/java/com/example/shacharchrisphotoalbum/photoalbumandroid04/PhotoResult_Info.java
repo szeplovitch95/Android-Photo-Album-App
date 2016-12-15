@@ -1,10 +1,8 @@
 package com.example.shacharchrisphotoalbum.photoalbumandroid04;
 
 import android.graphics.BitmapFactory;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -32,7 +30,6 @@ public class PhotoResult_Info extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_result__info);
 
-
         try {
             user = User.read(getApplicationContext());
         } catch (IOException | ClassNotFoundException o) {
@@ -58,6 +55,5 @@ public class PhotoResult_Info extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tags);
         tagsListView.setAdapter(adapter);
-
     }
 }

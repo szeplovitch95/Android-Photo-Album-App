@@ -5,6 +5,7 @@ import android.net.Uri;
 
 import com.example.shacharchrisphotoalbum.photoalbumandroid04.PhotoSRO;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,9 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
-    private static final long serialVersionUID = 4108914196952100996L;
-    public static final String storeDir = "Users";
-    public static final String storeFile = "albums";
+
+    public static final String storeDir = "/data/user/0/com.example.shacharchrisphotoalbum.photoalbumandroid04/files/";
+    public static final String storeFile = "albums.dat";
+    private static final long serialVersionUID = -1984438222161407315L;
 
     private List<Album> albums;
 
