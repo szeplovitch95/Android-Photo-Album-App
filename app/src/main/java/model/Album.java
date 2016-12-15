@@ -6,7 +6,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class Album implements Serializable {
     private String albumName;
     private List<Photo> photos = new ArrayList<Photo>();

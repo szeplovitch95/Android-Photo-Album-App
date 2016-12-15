@@ -28,6 +28,10 @@ import model.Photo;
 import model.Tag;
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class TagsManager extends AppCompatActivity {
     public static final int ADD_TAG_CODE = 1;
     public static final int EDIT_TAG_CODE = 2;

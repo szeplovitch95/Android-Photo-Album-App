@@ -16,6 +16,10 @@ import model.Photo;
 import model.Tag;
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class PhotoResult_Info extends AppCompatActivity {
     private User user;
     private int albumIndex;

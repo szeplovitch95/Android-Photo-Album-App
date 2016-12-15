@@ -18,6 +18,10 @@ import java.util.List;
 import model.Album;
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 class CustomAlbumAdapter extends ArrayAdapter<Album>{
     private List<Album> albumList;
     private Context mContext;

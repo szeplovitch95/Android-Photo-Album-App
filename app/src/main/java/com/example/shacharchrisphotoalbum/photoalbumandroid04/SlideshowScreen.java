@@ -15,6 +15,10 @@ import model.Album;
 import model.Photo;
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class SlideshowScreen extends AppCompatActivity {
     private Button previousBtn;
     private Button nextBtn;
@@ -77,6 +81,11 @@ public class SlideshowScreen extends AppCompatActivity {
         );
     }
 
+    /**
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void saveData() throws IOException, ClassNotFoundException {
         User.write(getApplicationContext(), user);
     }

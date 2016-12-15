@@ -14,6 +14,10 @@ import android.widget.ListAdapter;
 import java.io.IOException;
 import model.*;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class HomeScreen extends AppCompatActivity {
     public static final int EDIT_ALBUM_CODE = 1;
     public static final int ADD_ALBUM_CODE = 2;

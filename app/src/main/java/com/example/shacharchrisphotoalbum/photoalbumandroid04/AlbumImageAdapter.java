@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class AlbumImageAdapter extends BaseAdapter {
     private Context mContext;
     private List<String> mThumbIds = new ArrayList<String>();

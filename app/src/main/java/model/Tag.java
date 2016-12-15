@@ -3,6 +3,10 @@ package model;
 
 import java.io.Serializable;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class Tag implements Serializable {
     private int _id;
     private String tagType;

@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private List<Integer> mThumbIds = new ArrayList<Integer>();

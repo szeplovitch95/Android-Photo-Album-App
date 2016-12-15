@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class PhotoChooser extends AppCompatActivity {
     private ImageAdapter myImgAdapter;
     private int selectedItem = -1;
@@ -50,7 +54,7 @@ public class PhotoChooser extends AppCompatActivity {
         finish();
     }
 
-    //STILL NEEDS THE CORRECT IMPLEMENTATION ONCE KNOWING HOW AND FROM WHERE TO ADD PHOTOS TO THE APPLICATION.
+
     public void save(View view) {
 
         if(selectedItem == -1) {

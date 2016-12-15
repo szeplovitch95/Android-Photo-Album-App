@@ -14,6 +14,10 @@ import java.io.IOException;
 
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class SearchPhotosScreen extends AppCompatActivity {
     public static final int SEARCH_RESULTS_CODE = 1;
     private User user;

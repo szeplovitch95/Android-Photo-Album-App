@@ -13,6 +13,10 @@ import android.widget.EditText;
 import java.io.IOException;
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class AddEditAlbum extends AppCompatActivity {
     private int albumIndex;
     private EditText albumName;

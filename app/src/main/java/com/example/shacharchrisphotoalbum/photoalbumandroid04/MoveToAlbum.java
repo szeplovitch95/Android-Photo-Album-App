@@ -20,6 +20,10 @@ import java.util.List;
 import model.Album;
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class MoveToAlbum extends AppCompatActivity {
     private int albumIndex;
     private EditText photoName;

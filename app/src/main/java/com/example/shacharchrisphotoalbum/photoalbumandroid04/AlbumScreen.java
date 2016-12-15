@@ -26,6 +26,10 @@ import model.Album;
 import model.Photo;
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class AlbumScreen extends AppCompatActivity {
     public static final int ADD_PHOTO_CODE = 1;
     public static final int SLIDESHOW_CODE = 2;

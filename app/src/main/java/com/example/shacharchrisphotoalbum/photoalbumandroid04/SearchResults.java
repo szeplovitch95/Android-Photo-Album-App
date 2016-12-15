@@ -17,6 +17,10 @@ import java.util.List;
 import model.Album;
 import model.User;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class SearchResults extends AppCompatActivity {
     private static final int PHOTO_INFO_CODE = 99 ;
     private User user;

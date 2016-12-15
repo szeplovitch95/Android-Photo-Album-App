@@ -6,6 +6,10 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class AlbumDialogFragment extends DialogFragment {
 
     public static final String MESSAGE_KEY = "message_key";

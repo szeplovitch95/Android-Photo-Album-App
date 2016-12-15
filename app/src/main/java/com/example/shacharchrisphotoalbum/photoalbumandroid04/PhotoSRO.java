@@ -6,6 +6,10 @@ import java.util.List;
 import model.Album;
 import model.Photo;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class PhotoSRO {
     private Photo photo;
     private Album album;

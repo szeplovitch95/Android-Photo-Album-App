@@ -16,8 +16,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Shachar Zeplovitch
+ * @author Christopher Mcdonough
+ */
 public class User implements Serializable {
-
     public static final String storeDir = "/data/user/0/com.example.shacharchrisphotoalbum.photoalbumandroid04/files/";
     public static final String storeFile = "albums.dat";
     private static final long serialVersionUID = -1984438222161407315L;
